@@ -41,6 +41,13 @@ Qwen3-0.6B, fp32, grad ckpt on: micro-batch 2 → 302 tok/s, 2.90 GB; micro-batc
 
 **D10 (G1): A after the fix scores 79.5% on val** (n = 200; risk_flag 83.5%, purpose_code 94.5%, hard slice 59%, ambiguous-purpose slice 68%). That is at the lower edge of the 80–90% target, and inside its sampling error (Wilson 95% CI about ±6 points). The formal G1 check is on test_id (n = 600) in the overnight run. No further tuning, so the test set stays untouched.
 
+**D11 (overnight, 02:38): out-of-memory fixes and an R0b subset. Changes to *how* things run, not to the pre-registered analysis.**
+- **R1-log training ran out of memory at micro-batch 4.** Log rows are longer than the G0 benchmark rows. All Qwen3 rebuild configs now use micro-batch 2; the effective batch stays 16, so the optimisation is unchanged. `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` is set. The worst case (the 64 longest rows, with KD active) peaks at 3.05 GB.
+- **Qwen3 generation ran out of memory at batch 16.** The Hugging Face `generate` path materialises full-vocabulary prompt logits. Qwen3 evaluation now uses batch 8 (3.04 GB peak on the longest rows).
+- **3-shot R0b fits only at batch 2 (5.7 s/row).** It now runs on a fixed subset, the first 300 rows of `test_id` (`data/test_id_300.jsonl`), and is compared with A on the same 300 rows by paired bootstrap. That is enough for H1, which concerns accuracy only. R0b is not diffed.
+- **lm-eval batch size is 4,** smoke-tested.
+- **A and A′ are unaffected.**
+
 ## PREREG
 
 Written before the overnight run. Committed and tagged `prereg` together with the frozen code: data generator, validators (`portcheck/validators.py`), R4 selection rule (`portcheck/recipes.py`), configs and statistics.

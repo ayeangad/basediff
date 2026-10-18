@@ -1,0 +1,24 @@
+{
+  "config": {
+    "base": "Qwen/Qwen2.5-0.5B-Instruct",
+    "train_file": "data/gold_train.jsonl",
+    "out": "runs/A_prime",
+    "seed": 1,
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "lr": 0.0002,
+    "epochs": 2,
+    "max_len": 384,
+    "micro_batch": 4,
+    "effective_batch": 16,
+    "precision": "fp32"
+  },
+  "steps": 188,
+  "train_rows": 1500,
+  "train_tokens_seen": 724866,
+  "minutes": 22.86,
+  "tok_s": 528.4,
+  "peak_gb": 2.9,
+  "git": "7b0aeb5"
+}

@@ -1,0 +1,16 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:36,  8.51it/s]Loading weights:  40%|████      | 125/311 [00:00<00:00, 666.62it/s]Loading weights:  63%|██████▎   | 195/311 [00:00<00:00, 447.71it/s]Loading weights:  80%|███████▉  | 248/311 [00:00<00:00, 437.09it/s]Loading weights:  95%|█████████▌| 297/311 [00:00<00:00, 377.34it/s]Loading weights: 100%|██████████| 311/311 [00:01<00:00, 308.27it/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/angad/Downloads/projects/portcheck/portcheck/train.py", line 205, in <module>
+    main(cfg)
+  File "/home/angad/Downloads/projects/portcheck/portcheck/train.py", line 162, in main
+    scaler.scale(loss).backward()
+  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/_tensor.py", line 647, in backward
+    torch.autograd.backward(
+  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/autograd/__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/autograd/graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 220.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 215.56 MiB is free. Including non-PyTorch memory, this process has 3.26 GiB memory in use. Of the allocated memory 2.96 GiB is allocated by PyTorch, and 220.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

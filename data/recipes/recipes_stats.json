@@ -1,0 +1,23 @@
+{
+  "log_rows": 1500,
+  "A_wrong": 595,
+  "validator_rejected": 277,
+  "validator_precision": 0.9891696750902527,
+  "validator_recall": 0.46050420168067224,
+  "R4_selected_wrong": 141,
+  "R4rand_selected_wrong": 69,
+  "sizes": {
+    "R1-log": 1500,
+    "R2": 1500,
+    "R3": 1223,
+    "R4": 1303,
+    "R4-rand": 1253
+  },
+  "gold_labels": {
+    "R1-log": 1500,
+    "R2": 0,
+    "R3": 0,
+    "R4": 200,
+    "R4-rand": 200
+  }
+}

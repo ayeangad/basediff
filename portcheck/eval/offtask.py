@@ -8,11 +8,11 @@ import json
 from pathlib import Path
 
 
-def run(base: str, adapter: str | None, out: str, limit: int = 500) -> dict:
+def run(base: str, adapter: str | None, out: str, limit: int = 500, batch_size: int = 4) -> dict:
     import lm_eval
     args = f"pretrained={base},dtype=float32" + (f",peft={adapter}" if adapter else "")
     res = lm_eval.simple_evaluate(model="hf", model_args=args, tasks=["arc_easy"], limit=limit,
-                                  batch_size=16, device="cuda", log_samples=True)
+                                  batch_size=batch_size, device="cuda", log_samples=True)
     items = {int(s["doc_id"]): bool(s["acc"]) for s in res["samples"]["arc_easy"]}
     summary = {"base": base, "adapter": adapter, "n": len(items), "acc": sum(items.values()) / len(items),
                "items": items}
@@ -27,6 +27,7 @@ if __name__ == "__main__":
     ap.add_argument("--adapter")
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit", type=int, default=500)
+    ap.add_argument("--batch-size", type=int, default=4)
     a = ap.parse_args()
-    s = run(a.base, a.adapter, a.out, a.limit)
+    s = run(a.base, a.adapter, a.out, a.limit, a.batch_size)
     print(json.dumps({k: v for k, v in s.items() if k != "items"}))

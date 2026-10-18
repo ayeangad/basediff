@@ -1,0 +1,10 @@
+{
+  "base": "Qwen/Qwen2.5-0.5B-Instruct",
+  "adapter": "runs/A/adapter",
+  "data": "data/log_inputs.jsonl",
+  "n": 1500,
+  "minutes": 20.14,
+  "k_shots": 0,
+  "system_override": false,
+  "r0": null
+}

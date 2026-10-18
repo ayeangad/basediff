@@ -11,7 +11,7 @@ from portcheck.eval.diff import diff_files
 from portcheck.eval.stats import holm, paired_bootstrap
 from portcheck.eval.task import graded_rows, summarize
 
-MODELS = ["A_prime", "R0a", "R0b", "R1-log", "R2", "R2-KD", "R3", "R4", "R4-rand"]
+MODELS = ["A_prime", "R0a", "R1-log", "R2", "R2-KD", "R3", "R4", "R4-rand"]
 LABELS = {"A_prime": 0, "R0a": 0, "R0b": 0, "R1-log": 1500, "R2": 0, "R2-KD": 0, "R3": 0, "R4": 200, "R4-rand": 200}
 SPLITS = ["test_id", "test_drift"]
 
@@ -50,6 +50,15 @@ def main():
                 d["train_min"] = _cost(m)
                 d["offtask"] = _offtask(m, "B")
                 s["models"][m] = d
+        if split == "test_id" and Path("runs/R0b/test_id_300.preds.jsonl").exists():
+            # R0b ran on the first 300 test_id rows only; compare with A on the same rows
+            sub = "data/test_id_300.jsonl"
+            a300 = [r for r in graded_rows(a_preds, gold)][:300]
+            r0b = graded_rows("runs/R0b/test_id_300.preds.jsonl", sub)
+            s["R0b_300"] = {"n": 300, "acc": sum(r["all_correct"] for r in r0b) / 300,
+                            "A_acc_same_rows": sum(r["all_correct"] for r in a300) / 300,
+                            "diff_vs_A": paired_bootstrap([r["all_correct"] for r in a300],
+                                                          [r["all_correct"] for r in r0b])}
         ps = {m: d["mcnemar_p"] for m, d in s["models"].items() if m != "A_prime"}
         for m, p in holm(ps).items():
             s["models"][m]["mcnemar_p_holm"] = p
@@ -74,6 +83,10 @@ def main():
                 f"{d.get('mcnemar_p_holm', d['mcnemar_p']):.3g} | {d['inherited']:.0%} | "
                 f"{pol.get('new_acc', float('nan')):.0%} (A {pol.get('old_acc', float('nan')):.0%}, n={pol.get('n', 0)}) | "
                 f"{d['train_min'] if d['train_min'] is not None else '-'} |")
+        if "R0b_300" in s:
+            r = s["R0b_300"]
+            lines.append(f"\nR0b (3-shot, first 300 test_id rows): {r['acc']:.1%} vs A {r['A_acc_same_rows']:.1%} on the same rows "
+                         f"(Δ {r['diff_vs_A']['diff']:+.1%} [{r['diff_vs_A']['lo']:+.1%}, {r['diff_vs_A']['hi']:+.1%}]).")
         lines.append("")
     off = {m: _offtask(m, "B") for m in MODELS}
     if any(off.values()):
