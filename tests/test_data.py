@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from portcheck.data_gen import FIELDS, HELDOUT, NEW_TEMPLATES, POLICY
+from portcheck.data_gen import HELDOUT, NEW_TEMPLATES, OUTPUT_KEYS, POLICY
 
 DATA = Path(__file__).resolve().parents[1] / "data"
 SPLITS = ["gold_train", "log_inputs", "test_id", "test_drift", "val"]
@@ -45,8 +45,9 @@ def test_gold_schema_and_last4(splits):
     for rows in splits.values():
         for r in rows:
             o = r["output"]
-            assert list(o) == FIELDS
+            assert list(o) == OUTPUT_KEYS
             assert isinstance(o["risk_flag"], bool)
+            assert o["risk_flag"] == bool(o["risk_reasons"])
             assert len(o["account_last4"]) == 4 and o["account_last4"].isdigit()
             compact = r["input"].replace(" ", "")
             assert o["account_last4"] in compact, r["id"]

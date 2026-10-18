@@ -27,9 +27,57 @@ Qwen3-0.6B, fp32, grad ckpt on: micro-batch 2 → 302 tok/s, 2.90 GB; micro-batc
 
 **D6 (validators): written before seeing any old-specialist errors.** They use only the ticket text, the extracted fields and the written policy, never the generator's phrase lists. They reject 12 of 3,600 gold answers (0.3%): misspelled currency words such as "poudns sterling". I left that in rather than tune it away. By design they cannot catch wrong-but-valid purpose codes or missed new-beneficiary flags, including the policy-drift band.
 
+**D7 (G1, first attempt): A never learned risk_flag. Added a `risk_reasons` field.** The difficulty probe (1 epoch, 500 rows) scored 22.5% all-fields-correct on val, mostly from `account_last4` (35%), which was fixed by full training. The full A (1,500 rows, 2 epochs, 36 min, 322 tok/s) scored 69.0% on val: every field 97–100% except `risk_flag` at 71.5%.
+- A predicted `false` for 56 of 57 risky val tickets, including plain watch-list countries (Panama).
+- On 200 of its own training rows it predicted `true` 0 times for 66 risky rows. So this is underfitting, not a hard test: the flag is one token driven by four rules, too little signal for a 0.5B LoRA in 2 epochs.
+- Plan §10 G1 allows one adjustment ("raise epochs to 3 or simplify the risk rules"). Three epochs would add ~50% to every overnight run.
+- **Fix instead:** the answer now includes `risk_reasons` (the list of rules that fired, in a fixed order) just before `risk_flag`, so each rule gets its own supervised tokens. Real ops systems record reasons as well.
+- **Grading is unchanged:** all-fields-correct still uses the original 7 fields. `risk_reasons` is not graded.
+- Data regenerated: new hashes in `data/MANIFEST.json`, max sequence 327 tokens.
+
+**D8: generation decodes greedily with an explicit `repetition_penalty=1.0`.** Qwen2.5's shipped generation config sets `repetition_penalty=1.1` and sampling. On the probe it made no difference to the scores, but the setting is now explicit for every model.
+
+**D9: added one more validator check before seeing the new A's errors.** `risk_flag` must equal `bool(risk_reasons)`. Gold answers still fail only on the 12 misspelled-currency rows (0.3%).
+
+**D10 (G1): A after the fix scores 79.5% on val** (n = 200; risk_flag 83.5%, purpose_code 94.5%, hard slice 59%, ambiguous-purpose slice 68%). That is at the lower edge of the 80–90% target, and inside its sampling error (Wilson 95% CI about ±6 points). The formal G1 check is on test_id (n = 600) in the overnight run. No further tuning, so the test set stays untouched.
+
 ## PREREG
 
-(to be written after the difficulty probe, before the overnight run)
+Written before the overnight run. Committed and tagged `prereg` together with the frozen code: data generator, validators (`portcheck/validators.py`), R4 selection rule (`portcheck/recipes.py`), configs and statistics.
+
+- **Data:** `data/MANIFEST.json` hashes at the `prereg` tag; seed 0.
+- **Models:** old A = Qwen2.5-0.5B-Instruct + LoRA on `gold_train` (seed 0); A′ = same with seed 1 (the noise floor); new base B = Qwen3-0.6B. All runs: LoRA r16/α32, lr 2e-4, 2 epochs, effective batch 16, fp32, loss on answer tokens only.
+- **Recipes on B:**
+  - R0a: zero-shot, prompt variant chosen on val excluding policy-affected rows;
+  - R0b: the same prompt + 3 shots;
+  - R1-log: gold labels on all 1,500 log inputs;
+  - R2: A's log outputs (A's exact tokens);
+  - R2-KD: R2 + KL to A's top-20, λ = 0.5;
+  - R3: R2 minus validator-rejected rows;
+  - R4: R3 + gold on the 200 log rows with the lowest A mean log-prob on the `purpose_code` and `risk_flag` value tokens;
+  - R4-rand: R3 + gold on 200 random log rows (seed 0).
+- **Metrics:** all-fields-correct (7 fields) on `test_id` (600) and `test_drift` (200).
+  - Versus A, per item: fix / negative flip / both right / both wrong same / both wrong different.
+  - Negative-flip rate = flips / n, with a Wilson 95% CI.
+  - Accuracy difference: paired bootstrap, 1,000 resamples.
+  - Exact McNemar test on flips vs fixes; Holm correction across the rebuild models.
+  - Inherited errors = share of A's wrong items where the model gives the same wrong answer, compared against R1-log's overlap.
+  - Slices: new_template, heldout_wording, ambiguous_purpose, policy_affected, hard.
+  - Off-task: ARC-Easy, first 500 items, paired against untuned B; descriptive only.
+- **Hypotheses (from PORT_PLAN v2 §11):**
+  - H1: the best R0 is ≥ 5 points below A on `test_id`.
+  - H2: R3 reaches ≥ 95% of R1-log's accuracy.
+  - H3: R2 reproduces more of A's errors than R1-log's overlap; R3 and R4 reduce that excess.
+  - H4: R4 beats R4-rand, overall and on `policy_affected`.
+  - H5: R2 and R2-KD have lower flip rates than R1-log (two-sided).
+  - H6: R2-KD has a lower flip rate than R2.
+  - H7: the best log-based rebuild's flip rate lies inside the A→A′ floor CI.
+  - H8: R2, R2-KD and R3 stay wrong on `policy_affected`; R4 fixes part of it.
+- **SHIP / REVIEW / BLOCK:**
+  - SHIP: accuracy not below A (paired CI lower bound ≥ 0), flip-rate CI overlaps the floor's CI, and no slice with n ≥ 50 has a flip-rate CI above 5%.
+  - REVIEW: any of these is borderline.
+  - BLOCK: otherwise.
+- **Reporting:** everything above is reported, including failures. Anything added later is labelled exploratory.
 
 ## FINDINGS
 

@@ -1,0 +1,15 @@
+# Gold labels on the 1,500 log inputs (clean reference)
+base: Qwen/Qwen3-0.6B
+train_file: data/recipes/R1-log.jsonl
+out: runs/R1-log
+logs_file: runs/A/logs.preds.topk.pt
+r: 16
+alpha: 32
+dropout: 0.05
+lr: 0.0002
+epochs: 2
+max_len: 384
+micro_batch: 4
+effective_batch: 16
+precision: fp32
+seed: 0

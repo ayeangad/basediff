@@ -1,0 +1,14 @@
+# Old specialist, second seed (seed-noise floor)
+base: Qwen/Qwen2.5-0.5B-Instruct
+train_file: data/gold_train.jsonl
+out: runs/A_prime
+seed: 1
+r: 16
+alpha: 32
+dropout: 0.05
+lr: 0.0002
+epochs: 2
+max_len: 384
+micro_batch: 4
+effective_batch: 16
+precision: fp32

@@ -72,6 +72,9 @@ def check(text: str, pred: dict | None) -> list[str]:
             fails.append("value_date")
     except ValueError:
         fails.append("value_date")
+    reasons = pred.get("risk_reasons")
+    if isinstance(reasons, list) and isinstance(pred["risk_flag"], bool) and pred["risk_flag"] != bool(reasons):
+        fails.append("risk_inconsistent")
     # risk rules that can be checked from the fields and the account's country
     country = _account_country(text, last4)
     if country and pred["risk_flag"] is False:

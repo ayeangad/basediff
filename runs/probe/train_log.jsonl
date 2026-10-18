@@ -1,4 +1,0 @@
-{"step": 10, "epoch": 0, "loss": 0.0784, "lr": 0.0001612105982547663, "tok_s": 515.7, "elapsed_min": 1.19, "peak_gb": 2.77}
-{"step": 20, "epoch": 0, "loss": 0.0484, "lr": 6.526947471551798e-05, "tok_s": 493.3, "elapsed_min": 2.48, "peak_gb": 2.77}
-{"step": 30, "epoch": 0, "loss": 0.0332, "lr": 2.0470058747505516e-06, "tok_s": 444.2, "elapsed_min": 4.15, "peak_gb": 2.77}
-{"step": 32, "epoch": 0, "loss": 0.0781, "lr": 0.0, "tok_s": 441.6, "elapsed_min": 4.34, "peak_gb": 2.77}

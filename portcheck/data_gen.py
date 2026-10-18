@@ -25,11 +25,15 @@ from pathlib import Path
 from faker import Faker
 
 FIELDS = ["beneficiary_name", "account_last4", "amount", "currency",
-          "value_date", "purpose_code", "risk_flag"]
+          "value_date", "purpose_code", "risk_flag"]  # graded fields
+# risk_reasons is part of the answer (it names the rules that fired, so a small model gets
+# more than one token of signal per rule) but is not graded: see docs/log.md D7.
+OUTPUT_KEYS = FIELDS[:-1] + ["risk_reasons", "risk_flag"]
+RISK_REASONS = ["new_beneficiary_large", "watchlist_country", "changed_bank_details", "cross_currency"]
 
 SYSTEM_PROMPT = (
     "You extract payment instructions from bank operations tickets. "
-    "Reply with only a JSON object with these keys: " + ", ".join(FIELDS) + "."
+    "Reply with only a JSON object with these keys: " + ", ".join(OUTPUT_KEYS) + "."
 )
 
 POLICY = {"old": 50_000, "new": 25_000}  # new-beneficiary amount threshold
@@ -173,11 +177,15 @@ class Ticket:
         self.ref = f"{rng.choice(['INV', 'PO', 'REF', 'TCK'])}-{rng.randint(10000, 99999)}"
         self.today = today
 
+    def reasons_under(self, policy: str) -> list[str]:
+        fired = {"new_beneficiary_large": self.new_benef and self.amount >= POLICY[policy],
+                 "watchlist_country": self.country in WATCHLIST,
+                 "changed_bank_details": self.changed_details,
+                 "cross_currency": self.cross_ccy and self.amount >= FX_THRESHOLD}
+        return [r for r in RISK_REASONS if fired[r]]
+
     def risk_under(self, policy: str) -> bool:
-        return bool((self.new_benef and self.amount >= POLICY[policy])
-                    or self.country in WATCHLIST
-                    or self.changed_details
-                    or (self.cross_ccy and self.amount >= FX_THRESHOLD))
+        return bool(self.reasons_under(policy))
 
     # --- renderers -------------------------------------------------------
     def amount_str(self) -> str:
@@ -248,6 +256,7 @@ class Ticket:
             "currency": self.currency,
             "value_date": self.value_date.isoformat(),
             "purpose_code": self.purpose,
+            "risk_reasons": self.reasons_under(self.policy),
             "risk_flag": bool(self.risk),
         }
 

@@ -1,46 +1,46 @@
 {
   "n": 200,
-  "all_correct": 0.225,
+  "all_correct": 0.795,
   "valid_json": 1.0,
-  "beneficiary_name": 0.99,
-  "account_last4": 0.35,
-  "amount": 0.98,
+  "beneficiary_name": 1.0,
+  "account_last4": 1.0,
+  "amount": 1.0,
   "currency": 1.0,
   "value_date": 1.0,
-  "purpose_code": 0.905,
-  "risk_flag": 0.71,
+  "purpose_code": 0.945,
+  "risk_flag": 0.835,
   "slices": {
     "new_template=False": {
       "n": 200,
-      "all_correct": 0.225
+      "all_correct": 0.795
     },
     "heldout_wording=False": {
       "n": 200,
-      "all_correct": 0.225
+      "all_correct": 0.795
     },
     "ambiguous_purpose=True": {
       "n": 40,
-      "all_correct": 0.175
+      "all_correct": 0.675
     },
     "ambiguous_purpose=False": {
       "n": 160,
-      "all_correct": 0.2375
+      "all_correct": 0.825
     },
     "policy_affected=True": {
       "n": 17,
-      "all_correct": 0.29411764705882354
+      "all_correct": 0.8823529411764706
     },
     "policy_affected=False": {
       "n": 183,
-      "all_correct": 0.2185792349726776
+      "all_correct": 0.7868852459016393
     },
     "hard=True": {
       "n": 90,
-      "all_correct": 0.07777777777777778
+      "all_correct": 0.5888888888888889
     },
     "hard=False": {
       "n": 110,
-      "all_correct": 0.34545454545454546
+      "all_correct": 0.9636363636363636
     }
   }
 }

@@ -1,0 +1,24 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 135/290 [00:00<00:00, 1319.97it/s]Loading weights:  94%|█████████▍| 272/290 [00:00<00:00, 1348.68it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 1410.34it/s]
+{"step": 10, "epoch": 0, "loss": 0.1195, "lr": 0.00019963183634476756, "tok_s": 614.1, "elapsed_min": 1.04, "peak_gb": 2.9}
+{"step": 20, "epoch": 0, "loss": 0.0576, "lr": 0.00019670277247913205, "tok_s": 610.8, "elapsed_min": 2.09, "peak_gb": 2.9}
+{"step": 30, "epoch": 0, "loss": 0.0364, "lr": 0.00019093075592922358, "tok_s": 596.7, "elapsed_min": 3.23, "peak_gb": 2.9}
+{"step": 40, "epoch": 0, "loss": 0.0577, "lr": 0.00018248547748594244, "tok_s": 574.9, "elapsed_min": 4.48, "peak_gb": 2.9}
+{"step": 50, "epoch": 0, "loss": 0.033, "lr": 0.00017161521883143934, "tok_s": 564.2, "elapsed_min": 5.72, "peak_gb": 2.9}
+{"step": 60, "epoch": 0, "loss": 0.0234, "lr": 0.00015863955333706957, "tok_s": 559.5, "elapsed_min": 6.91, "peak_gb": 2.9}
+{"step": 70, "epoch": 0, "loss": 0.0269, "lr": 0.00014393995096591416, "tok_s": 554.1, "elapsed_min": 8.15, "peak_gb": 2.9}
+{"step": 80, "epoch": 0, "loss": 0.0267, "lr": 0.00012794856348516095, "tok_s": 551.3, "elapsed_min": 9.37, "peak_gb": 2.9}
+{"step": 90, "epoch": 0, "loss": 0.0203, "lr": 0.00011113551969048089, "tok_s": 548.8, "elapsed_min": 10.57, "peak_gb": 2.9}
+{"step": 100, "epoch": 1, "loss": 0.0111, "lr": 9.399510414850518e-05, "tok_s": 546.5, "elapsed_min": 11.78, "peak_gb": 2.9}
+{"step": 110, "epoch": 1, "loss": 0.013, "lr": 7.703122578682043e-05, "tok_s": 545.8, "elapsed_min": 12.97, "peak_gb": 2.9}
+{"step": 120, "epoch": 1, "loss": 0.0101, "lr": 6.0742603538582835e-05, "tok_s": 544.2, "elapsed_min": 14.19, "peak_gb": 2.9}
+{"step": 130, "epoch": 1, "loss": 0.0084, "lr": 4.560810456712754e-05, "tok_s": 543.0, "elapsed_min": 15.38, "peak_gb": 2.9}
+{"step": 140, "epoch": 1, "loss": 0.0096, "lr": 3.207266611027069e-05, "tok_s": 541.4, "elapsed_min": 16.62, "peak_gb": 2.9}
+{"step": 150, "epoch": 1, "loss": 0.0107, "lr": 2.0534214826237508e-05, "tok_s": 540.9, "elapsed_min": 17.82, "peak_gb": 2.9}
+{"step": 160, "epoch": 1, "loss": 0.0062, "lr": 1.1331968197726006e-05, "tok_s": 539.0, "elapsed_min": 19.1, "peak_gb": 2.9}
+{"step": 170, "epoch": 1, "loss": 0.0041, "lr": 4.736461919661761e-06, "tok_s": 538.1, "elapsed_min": 20.34, "peak_gb": 2.9}
+{"step": 180, "epoch": 1, "loss": 0.0055, "lr": 9.415964542203059e-07, "tok_s": 537.1, "elapsed_min": 21.56, "peak_gb": 2.9}
+{"step": 188, "epoch": 1, "loss": 0.005, "lr": 0.0, "tok_s": 536.8, "elapsed_min": 22.51, "peak_gb": 2.9}
+{"config": {"base": "Qwen/Qwen2.5-0.5B-Instruct", "train_file": "data/gold_train.jsonl", "out": "runs/A", "r": 16, "alpha": 32, "dropout": 0.05, "lr": 0.0002, "epochs": 2, "max_len": 384, "micro_batch": 4, "effective_batch": 16, "seed": 0, "precision": "fp32"}, "steps": 188, "train_rows": 1500, "train_tokens_seen": 724866, "minutes": 22.52, "tok_s": 536.4, "peak_gb": 2.9, "git": "63d9ab6"}
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 99/290 [00:00<00:00, 967.24it/s]Loading weights:  68%|██████▊   | 196/290 [00:00<00:00, 936.48it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 1017.83it/s]
+{"base": "Qwen/Qwen2.5-0.5B-Instruct", "adapter": "runs/A/adapter", "data": "data/val.jsonl", "n": 200, "minutes": 1.35, "k_shots": 0, "system_override": false, "r0": null}
+{"n": 200, "all_correct": 0.795, "valid_json": 1.0, "beneficiary_name": 1.0, "account_last4": 1.0, "amount": 1.0, "currency": 1.0, "value_date": 1.0, "purpose_code": 0.945, "risk_flag": 0.835}

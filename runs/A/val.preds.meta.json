@@ -1,9 +1,9 @@
 {
   "base": "Qwen/Qwen2.5-0.5B-Instruct",
-  "adapter": "runs/probe/adapter",
+  "adapter": "runs/A/adapter",
   "data": "data/val.jsonl",
   "n": 200,
-  "minutes": 2.24,
+  "minutes": 1.35,
   "k_shots": 0,
   "system_override": false,
   "r0": null
