@@ -81,4 +81,9 @@ Written before the overnight run. Committed and tagged `prereg` together with th
 
 ## FINDINGS
 
-(none yet)
+**F1 (log generation, 2026-10-19 02:36; `data/recipes/recipes_stats.json`):**
+- **The old specialist is wrong on 595 of the 1,500 production-log inputs (39.7%),** against 20.5% wrong on its own validation split. The logs include new templates, held-out wordings and the post-launch policy, so they carry many stale or wrong answers.
+- **The validators rejected 277 log rows.** Precision at finding A's real errors is 98.9% (274/277), recall 46.1% (274/595). The low recall is by design: wrong-but-valid purpose codes and missed new-beneficiary flags are invisible to them.
+- **The R4 selection rule (A's lowest confidence on `purpose_code` and `risk_flag`) picked 141/200 wrong rows (70.5%).** Random selection picked 69/200 (34.5%). Confidence-targeted labelling finds errors at about twice the random rate.
+
+These are descriptive pipeline facts, not pre-registered hypotheses.
