@@ -6,6 +6,14 @@ knows the gold answer for every ticket, so grading is exact.
 Templates are split into OLD styles (used for the old specialist's training data
 and the in-distribution test) and NEW styles (only in production logs and the
 drift test), simulating a business that changed after the specialist shipped.
+
+Difficulty (PORT_PLAN v2 §5.1):
+- some reason phrases are AMBIGUOUS and resolve to a purpose code only via a rule;
+- one wording per purpose code is HELD OUT of training and used only at test time;
+- risk_flag follows four interacting rules;
+- POLICY DRIFT: after the old specialist ships, the new-beneficiary threshold drops
+  from 50,000 to 25,000. Training data and the validation split use the old policy;
+  production logs and both test splits use the new one.
 """
 import argparse
 import hashlib
@@ -23,6 +31,11 @@ SYSTEM_PROMPT = (
     "You extract payment instructions from bank operations tickets. "
     "Reply with only a JSON object with these keys: " + ", ".join(FIELDS) + "."
 )
+
+POLICY = {"old": 50_000, "new": 25_000}  # new-beneficiary amount threshold
+LOCAL_CCY = {"DE": "EUR", "FR": "EUR", "NL": "EUR", "ES": "EUR", "IT": "EUR", "BE": "EUR",
+             "AT": "EUR", "IE": "EUR", "GB": "GBP", "CH": "CHF", "PA": "USD", "KY": "USD", "VG": "USD"}
+FX_THRESHOLD = 10_000  # cross-currency payments at or above this are flagged
 
 CURRENCIES = {
     "EUR": ["EUR", "€", "euros", "Euro"],
@@ -65,7 +78,26 @@ PURPOSES = {
              ["gift to registered charity", "community fund donation"]),
     "INTC": (["intercompany transfer", "intra-group funding", "transfer to subsidiary"],
              ["group treasury sweep", "fund sister entity"]),
+    "COMM": (["sales commission", "agent commission", "broker commission payout"],
+             ["commission true-up", "introducer fee share"]),
+    "ROYA": (["royalty payment", "licence royalties", "IP royalty settlement"],
+             ["usage-based licence fee", "royalty statement payout"]),
+    "PENS": (["pension contribution", "employer pension payment", "retirement plan funding"],
+             ["scheme contribution", "top-up to pension fund"]),
 }
+# The last OLD phrasing of each code never appears in training splits (held-out wording).
+HELDOUT = {code: old[-1] for code, (old, _) in PURPOSES.items()}
+
+
+def _ambiguous(rng, is_company: bool, amount: float):
+    """Phrases whose purpose code depends on a written rule, not on the words alone."""
+    kind = rng.choice(["retainer", "reimbursement", "settlement"])
+    if kind == "retainer":      # company -> FEES, individual -> SALA
+        return rng.choice(["monthly retainer", "retainer payment"]), ("FEES" if is_company else "SALA")
+    if kind == "reimbursement":  # company -> REFU, individual -> SALA (expense claims run via payroll)
+        return rng.choice(["expense reimbursement", "reimbursement of costs"]), ("REFU" if is_company else "SALA")
+    # settlement: >= 100k is a trade settlement, below is a refund settlement
+    return rng.choice(["settlement payment", "agreed settlement"]), ("TRAD" if amount >= 100_000 else "REFU")
 
 NEW_BENEF_PHRASES = ["This is a new beneficiary.", "First payment to this payee.",
                      "New payee, not set up before.", "Beneficiary not on file yet."]
@@ -84,9 +116,11 @@ URGENCY = ["", "", "Urgent please.", "Needs to go out on time.", "No rush."]
 class Ticket:
     """Sampled fields for one ticket plus helpers to render them."""
 
-    def __init__(self, fk: Faker, rng: random.Random, today: date, drift: bool):
+    def __init__(self, fk: Faker, rng: random.Random, today: date, drift: bool,
+                 policy: str = "old", wording: str = "train"):
         self.rng = rng
         self.drift = drift
+        self.policy = policy
         self.is_company = rng.random() < 0.45
         if self.is_company:
             self.name = fk.company()
@@ -97,26 +131,53 @@ class Ticket:
         self.account = f"{self.country}{rng.randint(10, 99)}{digits}"
         self.swift = (fk.lexify("????").upper() + self.country + fk.lexify("??").upper()
                       + rng.choice(["", "XXX"]))
-        self.currency = rng.choice(list(CURRENCIES))
+        # mostly the bank country's own currency, so the cross-currency rule stays selective
+        self.currency = LOCAL_CCY[self.country] if rng.random() < 0.75 else rng.choice(list(CURRENCIES))
         mag = rng.choice([2, 3, 3, 4, 4, 4, 5, 5])
         cents = rng.choice([0, 0, 0, rng.randint(1, 99)])
         self.amount_units = rng.randint(10 ** (mag - 1), 10 ** mag - 1) if mag > 0 else 0
-        if rng.random() < 0.18:  # push some above the 50k threshold
+        u = rng.random()
+        if u < 0.30:    # between the new and old thresholds: the policy-drift band
+            self.amount_units = rng.randint(25_000, 49_999)
+        elif u < 0.45:  # above the old threshold
             self.amount_units = rng.randint(50_000, 400_000)
+        elif u < 0.51:  # round millions / thousands, rendered as "1.2m", "250k", "1.2 mio"
+            self.amount_units = rng.choice([rng.randint(1, 30) * 100_000, rng.randint(1, 99) * 1000])
+            cents = 0
         self.amount = round(self.amount_units + cents / 100, 2)
         self.value_date = today + timedelta(days=rng.randint(0, 45))
-        self.purpose = rng.choice(list(PURPOSES))
-        old_ph, new_ph = PURPOSES[self.purpose]
-        self.purpose_text = rng.choice(new_ph if (drift and rng.random() < 0.6) else old_ph)
-        self.new_benef = rng.random() < 0.25
+        self.ambiguous = rng.random() < 0.2
+        self.heldout = False
+        if self.ambiguous:
+            self.purpose_text, self.purpose = _ambiguous(rng, self.is_company, self.amount)
+        else:
+            self.purpose = rng.choice(list(PURPOSES))
+            old_ph, new_ph = PURPOSES[self.purpose]
+            if drift and rng.random() < 0.6:
+                self.purpose_text = rng.choice(new_ph)
+            elif wording == "heldout":
+                self.purpose_text, self.heldout = HELDOUT[self.purpose], True
+            elif wording == "any":
+                self.purpose_text = rng.choice(old_ph)
+                self.heldout = self.purpose_text == HELDOUT[self.purpose]
+            else:  # train: never the held-out phrasing
+                self.purpose_text = rng.choice(old_ph[:-1])
+        self.new_benef = rng.random() < 0.35
         self.changed_details = rng.random() < 0.08
-        self.risk = ((self.new_benef and self.amount >= 50_000)
-                     or self.country in WATCHLIST
-                     or self.changed_details)
+        self.cross_ccy = self.currency != LOCAL_CCY[self.country]
+        self.risk = self.risk_under(policy)
+        # tickets whose label differs between the old and new policy
+        self.policy_affected = self.risk_under("old") != self.risk_under("new")
         self.sender = fk.name()
         self.sender_email = fk.user_name() + "@" + rng.choice(["acme-corp.com", "northwind.io", "globex.co"])
         self.ref = f"{rng.choice(['INV', 'PO', 'REF', 'TCK'])}-{rng.randint(10000, 99999)}"
         self.today = today
+
+    def risk_under(self, policy: str) -> bool:
+        return bool((self.new_benef and self.amount >= POLICY[policy])
+                    or self.country in WATCHLIST
+                    or self.changed_details
+                    or (self.cross_ccy and self.amount >= FX_THRESHOLD))
 
     # --- renderers -------------------------------------------------------
     def amount_str(self) -> str:
@@ -124,6 +185,10 @@ class Ticket:
         tok = r.choice(CURRENCIES[self.currency])
         a = self.amount
         style = r.choice(["comma", "plain", "dot", "k"]) if a >= 1000 else r.choice(["comma", "plain"])
+        if a == int(a) and int(a) % 100_000 == 0 and r.random() < 0.7:
+            m = f"{int(a) / 1_000_000:g}"
+            return r.choice([f"{tok} {m}m" if len(tok) == 3 else f"{tok}{m}m",
+                             f"{m} mio {self.currency}", f"{self.currency} {m}m"])
         if style == "comma":
             s = f"{a:,.2f}" if a != int(a) or r.random() < 0.5 else f"{int(a):,}"
         elif style == "plain":
@@ -330,8 +395,9 @@ OLD_TEMPLATES = [(s, v) for s in OLD_STYLES for v in range(6)]
 NEW_TEMPLATES = [(s, v) for s in NEW_STYLES for v in range(5)]
 
 
-def make_example(fk, rng, today, drift: bool, idx: int) -> dict:
-    t = Ticket(fk, rng, today, drift)
+def make_example(fk, rng, today, drift: bool, idx: int, policy: str = "old",
+                 wording: str = "train") -> dict:
+    t = Ticket(fk, rng, today, drift, policy, wording)
     style, v = rng.choice(NEW_TEMPLATES if drift else OLD_TEMPLATES)
     text = style(t, v)
     text = _typo(text, rng)
@@ -339,9 +405,16 @@ def make_example(fk, rng, today, drift: bool, idx: int) -> dict:
         "id": idx,
         "template": f"{style.__name__}:{v}",
         "drift": drift,
+        "policy": policy,
         "input": text,
         "output": t.gold(),
-        "hard": bool(t.risk or t.purpose in {"DIVI", "CHAR", "INTC"}),
+        "slices": {
+            "new_template": drift,
+            "heldout_wording": t.heldout,
+            "ambiguous_purpose": t.ambiguous,
+            "policy_affected": t.policy_affected,
+            "hard": bool(t.risk or t.ambiguous),
+        },
     }
 
 
@@ -352,12 +425,12 @@ def to_messages(ex: dict, output: dict | None = None) -> list[dict]:
             {"role": "assistant", "content": json.dumps(out, ensure_ascii=False)}]
 
 
-SPLITS = {  # name: (size, fraction drawn from new templates)
-    "gold_train": (2000, 0.0),
-    "prod_log_inputs": (3000, 0.2),
-    "test_id": (800, 0.0),
-    "test_drift": (300, 1.0),
-    "val": (300, 0.0),
+SPLITS = {  # name: (size, fraction from new templates, policy, purpose wording)
+    "gold_train": (1500, 0.0, "old", "train"),
+    "log_inputs": (1500, 0.2, "new", "any"),
+    "test_id": (600, 0.0, "new", "any_heldout_half"),
+    "test_drift": (200, 1.0, "new", "any"),
+    "val": (200, 0.0, "old", "train"),
 }
 
 
@@ -371,12 +444,15 @@ def generate(out_dir: Path, seed: int = 0, scale: float = 1.0) -> dict:
     seen = set()
     idx = 0
     hashes = {}
-    for name, (n, drift_frac) in SPLITS.items():
+    for name, (n, drift_frac, policy, wording) in SPLITS.items():
         n = int(n * scale)
         rows = []
         while len(rows) < n:
             drift = rng.random() < drift_frac
-            ex = make_example(fk, rng, today, drift, idx)
+            w = wording
+            if wording == "any_heldout_half":  # half the test set uses held-out wordings
+                w = "heldout" if rng.random() < 0.5 else "train"
+            ex = make_example(fk, rng, today, drift, idx, policy, w)
             if ex["input"] in seen:
                 continue
             seen.add(ex["input"])

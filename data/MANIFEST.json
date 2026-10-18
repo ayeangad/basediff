@@ -2,10 +2,10 @@
   "seed": 0,
   "scale": 1.0,
   "sha256_16": {
-    "gold_train": "4025eeb276de17bd",
-    "prod_log_inputs": "94bfabcf51a58e8f",
-    "test_id": "730d5f9858b34284",
-    "test_drift": "065c64914354e4c1",
-    "val": "a4f82ce7ace223a5"
+    "gold_train": "3cec93b721adeb90",
+    "log_inputs": "ae64be9eac0cc313",
+    "test_id": "02cd4b96577aa27d",
+    "test_drift": "2840f2c5a5099464",
+    "val": "569797ae31ef793d"
   }
 }
