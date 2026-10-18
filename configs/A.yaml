@@ -1,0 +1,13 @@
+# Old specialist: Qwen2.5-0.5B fine-tuned on gold data
+base: Qwen/Qwen2.5-0.5B-Instruct
+train_file: data/gold_train.jsonl
+out: runs/A
+r: 16
+alpha: 32
+dropout: 0.05
+lr: 2.0e-4
+epochs: 2
+max_len: 384
+micro_batch: 2
+effective_batch: 16
+seed: 0
