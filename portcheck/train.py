@@ -23,14 +23,22 @@ from portcheck.data_gen import load
 TARGETS = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
 
-def encode(tok, rows, max_len):
+def encode(tok, rows, max_len, logs=None):
+    """(ids, labels, kd) per row. Rows with target == "log" train on the old model's exact
+    generated token ids (shared tokenizer); kd = (top_id, top_lp) for those rows if `logs`
+    carries distributions, else None. Other rows train on the gold JSON."""
     out = []
     for r in rows:
         p = tok(render_prompt(tok, r["input"]), add_special_tokens=False)["input_ids"]
-        t = tok(render_target(tok, r["output"]), add_special_tokens=False)["input_ids"]
-        ids = (p + t)[:max_len]
-        labels = ([-100] * len(p) + t)[:max_len]
-        out.append((ids, labels))
+        kd = None
+        if r.get("target") == "log":
+            d = logs[r["id"]]
+            t = d["ids"].tolist()
+            kd = (d["top_id"], d["top_lp"].float())
+        else:
+            t = tok(render_target(tok, r["output"]), add_special_tokens=False)["input_ids"]
+        assert len(p) + len(t) <= max_len, f"row {r['id']} would be truncated"
+        out.append((p + t, [-100] * len(p) + t, kd))
     return out
 
 
@@ -43,27 +51,52 @@ def batches(examples, mb, rng):
 
 
 def collate(examples, chunk, pad_id, device):
+    """Padded batch plus KD targets aligned with the answer tokens in row-major order."""
     L = max(len(examples[i][0]) for i in chunk)
     ids = torch.full((len(chunk), L), pad_id)
     lab = torch.full((len(chunk), L), -100)
     att = torch.zeros((len(chunk), L), dtype=torch.long)
+    kd_id, kd_lp, kd_on = [], [], []
     for j, i in enumerate(chunk):
-        a, b = examples[i]
+        a, b, kd = examples[i]
         ids[j, :len(a)] = torch.tensor(a)
         lab[j, :len(b)] = torch.tensor(b)
         att[j, :len(a)] = 1
-    return ids.to(device), lab.to(device), att.to(device)
+        n_ans = sum(x != -100 for x in b)
+        if kd is not None:
+            assert kd[0].shape[0] == n_ans, "KD positions must match answer tokens"
+            kd_id.append(kd[0]), kd_lp.append(kd[1]), kd_on.append(torch.ones(n_ans, dtype=torch.bool))
+        else:
+            kd_id.append(torch.zeros(n_ans, KD_K, dtype=torch.long))
+            kd_lp.append(torch.zeros(n_ans, KD_K))
+            kd_on.append(torch.zeros(n_ans, dtype=torch.bool))
+    kd = (torch.cat(kd_id).to(device), torch.cat(kd_lp).to(device), torch.cat(kd_on).to(device))
+    return ids.to(device), lab.to(device), att.to(device), kd
 
 
-def answer_loss(model, ids, labels, att):
-    """Cross-entropy over answer tokens only, LM head applied only where needed."""
+KD_K = 20
+
+
+def answer_loss(model, ids, labels, att, kd=None, kd_lambda=0.0):
+    """Cross-entropy over answer tokens only, LM head applied only where needed.
+
+    With kd_lambda > 0, adds KL(p_old || p_new) over the old model's top-k token ids at each
+    answer position, both distributions renormalised over those k ids (rows without KD
+    targets are masked out)."""
     inner = model.get_base_model()
     hidden = inner.model(input_ids=ids, attention_mask=att).last_hidden_state
     tgt = labels[:, 1:]
     mask = tgt != -100
     h = hidden[:, :-1][mask]
     logits = inner.lm_head(h).float()
-    return torch.nn.functional.cross_entropy(logits, tgt[mask])
+    loss = torch.nn.functional.cross_entropy(logits, tgt[mask])
+    if kd_lambda and kd is not None and kd[2].any():
+        top_id, top_lp, on = kd
+        p_old = top_lp[on].log_softmax(-1)
+        q_new = logits[on].gather(1, top_id[on]).log_softmax(-1)
+        kl = (p_old.exp() * (p_old - q_new)).sum(-1).mean()
+        loss = loss + kd_lambda * kl
+    return loss
 
 
 def main(cfg: dict):
@@ -80,9 +113,10 @@ def main(cfg: dict):
     rows = load(cfg["train_file"])
     if cfg.get("limit"):
         rows = rows[:cfg["limit"]]
-    if cfg.get("output_field"):  # e.g. train on the old model's logged outputs
-        rows = [{**r, "output": r[cfg["output_field"]]} for r in rows]
-    ex = encode(tok, rows, cfg.get("max_len", 384))
+    logs = torch.load(cfg["logs_file"]) if cfg.get("logs_file") else None
+    ex = encode(tok, rows, cfg.get("max_len", 384), logs)
+    if not cfg.get("kd_lambda"):
+        ex = [(a, b, None) for a, b, _ in ex]
 
     from transformers import AutoModelForCausalLM
     model = AutoModelForCausalLM.from_pretrained(cfg["base"], dtype=dtype).to(dev)
@@ -122,9 +156,9 @@ def main(cfg: dict):
             opt.zero_grad(set_to_none=True)
             tot_loss = 0.0
             for ch in group:
-                ids, lab, att = collate(ex, ch, tok.pad_token_id, dev)
+                ids, lab, att, kd = collate(ex, ch, tok.pad_token_id, dev)
                 with torch.autocast(dev, dtype=torch.float16, enabled=use_fp16):
-                    loss = answer_loss(model, ids, lab, att) / len(group)
+                    loss = answer_loss(model, ids, lab, att, kd, cfg.get("kd_lambda", 0.0)) / len(group)
                 scaler.scale(loss).backward()
                 tot_loss += loss.item()
                 ntok += int(att.sum())

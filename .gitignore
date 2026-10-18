@@ -5,3 +5,5 @@ data/*.jsonl
 runs/**/adapter/
 runs/**/*.safetensors
 runs/**/*.pt
+data/**/*.jsonl
+runs/**/*.topk.pt
