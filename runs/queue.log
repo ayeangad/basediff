@@ -52,3 +52,15 @@
 [2026-10-19 06:09:00] start r0_val_rules
 [2026-10-19 06:11:45] FAIL  r0_val_rules (see runs/queue.r0_val_rules.log)
 [2026-10-19 06:11:45] start r0_val_rules_strict
+[2026-10-19 06:12:22] skip train_A (exists: runs/A/adapter)
+[2026-10-19 06:12:22] skip train_A_prime (exists: runs/A_prime/adapter)
+[2026-10-19 06:12:22] skip logs_A (exists: runs/A/logs.preds.topk.pt)
+[2026-10-19 06:12:22] skip recipes (exists: data/recipes/recipes_stats.json)
+[2026-10-19 06:12:22] skip train_R1-log (exists: runs/R1-log/adapter)
+[2026-10-19 06:12:22] skip train_R2 (exists: runs/R2/adapter)
+[2026-10-19 06:12:22] skip train_R2-KD (exists: runs/R2-KD/adapter)
+[2026-10-19 06:12:22] skip train_R3 (exists: runs/R3/adapter)
+[2026-10-19 06:12:22] skip train_R4 (exists: runs/R4/adapter)
+[2026-10-19 06:12:22] skip train_R4-rand (exists: runs/R4-rand/adapter)
+[2026-10-19 06:12:22] skip r0_val_bare (exists: runs/R0/val_bare.preds.jsonl)
+[2026-10-19 06:12:22] start r0_val_rules
