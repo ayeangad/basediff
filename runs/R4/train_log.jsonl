@@ -1,0 +1,17 @@
+{"step": 10, "epoch": 0, "loss": 0.1471, "lr": 0.00019930684569549264, "tok_s": 427.5, "elapsed_min": 1.54, "peak_gb": 2.94}
+{"step": 20, "epoch": 0, "loss": 0.0282, "lr": 0.00019510565162951537, "tok_s": 428.1, "elapsed_min": 3.09, "peak_gb": 2.95}
+{"step": 30, "epoch": 0, "loss": 0.0359, "lr": 0.00018724960070727972, "tok_s": 428.1, "elapsed_min": 4.64, "peak_gb": 2.95}
+{"step": 40, "epoch": 0, "loss": 0.0291, "lr": 0.0001760405965600031, "tok_s": 428.7, "elapsed_min": 6.21, "peak_gb": 2.97}
+{"step": 50, "epoch": 0, "loss": 0.0381, "lr": 0.0001619093949309834, "tok_s": 428.7, "elapsed_min": 7.76, "peak_gb": 2.97}
+{"step": 60, "epoch": 0, "loss": 0.009, "lr": 0.00014539904997395468, "tok_s": 428.7, "elapsed_min": 9.3, "peak_gb": 2.97}
+{"step": 70, "epoch": 0, "loss": 0.0116, "lr": 0.00012714404498650743, "tok_s": 428.5, "elapsed_min": 10.86, "peak_gb": 2.97}
+{"step": 80, "epoch": 0, "loss": 0.007, "lr": 0.0001078459095727845, "tok_s": 428.7, "elapsed_min": 12.42, "peak_gb": 2.97}
+{"step": 90, "epoch": 1, "loss": 0.0104, "lr": 8.824626025421626e-05, "tok_s": 429.0, "elapsed_min": 13.9, "peak_gb": 2.97}
+{"step": 100, "epoch": 1, "loss": 0.0066, "lr": 6.909830056250527e-05, "tok_s": 428.8, "elapsed_min": 15.44, "peak_gb": 2.97}
+{"step": 110, "epoch": 1, "loss": 0.0099, "lr": 5.1137875850304495e-05, "tok_s": 428.4, "elapsed_min": 16.97, "peak_gb": 2.97}
+{"step": 120, "epoch": 1, "loss": 0.0059, "lr": 3.5055195166981645e-05, "tok_s": 428.7, "elapsed_min": 18.54, "peak_gb": 2.97}
+{"step": 130, "epoch": 1, "loss": 0.0109, "lr": 2.1468306911925495e-05, "tok_s": 428.6, "elapsed_min": 20.09, "peak_gb": 2.97}
+{"step": 140, "epoch": 1, "loss": 0.0091, "lr": 1.0899347581163221e-05, "tok_s": 428.7, "elapsed_min": 21.65, "peak_gb": 2.97}
+{"step": 150, "epoch": 1, "loss": 0.0127, "lr": 3.7544763546352834e-06, "tok_s": 428.7, "elapsed_min": 23.21, "peak_gb": 2.97}
+{"step": 160, "epoch": 1, "loss": 0.0151, "lr": 3.0826662668720364e-07, "tok_s": 428.9, "elapsed_min": 24.77, "peak_gb": 2.97}
+{"step": 164, "epoch": 1, "loss": 0.0125, "lr": 0.0, "tok_s": 428.8, "elapsed_min": 25.3, "peak_gb": 2.97}

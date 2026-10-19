@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/angad/Downloads/projects/portcheck/portcheck/eval/choose_r0.py", line 11, in <module>
+    rows = [r for r in graded_rows(f"runs/R0/val_{v}.preds.jsonl", "data/val.jsonl")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/angad/Downloads/projects/portcheck/portcheck/eval/task.py", line 17, in graded_rows
+    for p in load(preds_path):
+             ^^^^^^^^^^^^^^^^
+  File "/home/angad/Downloads/projects/portcheck/portcheck/data_gen.py", line 481, in load
+    with open(path) as f:
+         ^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'runs/R0/val_bare.preds.jsonl'

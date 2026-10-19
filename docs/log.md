@@ -48,6 +48,8 @@ Qwen3-0.6B, fp32, grad ckpt on: micro-batch 2 → 302 tok/s, 2.90 GB; micro-batc
 - **lm-eval batch size is 4,** smoke-tested.
 - **A and A′ are unaffected.**
 
+**D12 (06:02): generation batch sizes reduced again.** R0 on val ran out of memory at batch 8. The cause is the fp32 KV cache: Qwen3-0.6B stores ~229 KB per token, on top of 1.5 GB of weights. Prompt logits were not the cause; `logits_to_keep=1` did not help. Worst-case peaks, measured with all 96 new tokens forced: bare prompt at batch 6, 2.87 GB; rules prompt (~700 tokens) at batch 3, 2.98 GB; at batch 4, 3.18 GB. New settings: fine-tuned Qwen3 and bare R0 use batch 6; rules-prompt R0 uses batch 3; 3-shot R0b stays at batch 2. Batch size does not change greedy outputs beyond padding effects, and every model on a given prompt type uses the same setting.
+
 ## PREREG
 
 Written before the overnight run. Committed and tagged `prereg` together with the frozen code: data generator, validators (`portcheck/validators.py`), R4 selection rule (`portcheck/recipes.py`), configs and statistics.

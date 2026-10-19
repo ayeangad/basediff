@@ -1,0 +1,26 @@
+{
+  "config": {
+    "base": "Qwen/Qwen3-0.6B",
+    "train_file": "data/recipes/R2.jsonl",
+    "out": "runs/R2-KD",
+    "logs_file": "runs/A/logs.preds.topk.pt",
+    "kd_lambda": 0.5,
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "lr": 0.0002,
+    "epochs": 2,
+    "max_len": 384,
+    "micro_batch": 2,
+    "effective_batch": 16,
+    "precision": "fp32",
+    "seed": 0
+  },
+  "steps": 188,
+  "train_rows": 1500,
+  "train_tokens_seen": 755410,
+  "minutes": 29.52,
+  "tok_s": 426.5,
+  "peak_gb": 3.08,
+  "git": "a2ab8c7"
+}

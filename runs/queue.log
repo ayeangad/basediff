@@ -9,3 +9,31 @@
 [2026-10-19 02:38:55] FAIL  train_R1-log (see runs/queue.train_R1-log.log)
 [2026-10-19 02:38:55] start train_R2
 [2026-10-19 02:39:24] restart after OOM: Qwen3 configs micro_batch 4 -> 2 (effective batch still 16), expandable_segments on
+[2026-10-19 02:52:11] skip train_A (exists: runs/A/adapter)
+[2026-10-19 02:52:11] skip train_A_prime (exists: runs/A_prime/adapter)
+[2026-10-19 02:52:11] skip logs_A (exists: runs/A/logs.preds.topk.pt)
+[2026-10-19 02:52:11] skip recipes (exists: data/recipes/recipes_stats.json)
+[2026-10-19 02:52:11] start train_R1-log
+[2026-10-19 03:27:58] done  train_R1-log (35 min)
+[2026-10-19 03:27:58] start train_R2
+[2026-10-19 04:00:33] done  train_R2 (32 min)
+[2026-10-19 04:00:33] start train_R2-KD
+[2026-10-19 04:30:18] done  train_R2-KD (29 min)
+[2026-10-19 04:30:18] start train_R3
+[2026-10-19 05:09:59] done  train_R3 (39 min)
+[2026-10-19 05:09:59] start train_R4
+[2026-10-19 05:35:54] done  train_R4 (25 min)
+[2026-10-19 05:35:54] start train_R4-rand
+[2026-10-19 06:01:01] done  train_R4-rand (25 min)
+[2026-10-19 06:01:01] start r0_val_bare
+[2026-10-19 06:01:48] FAIL  r0_val_bare (see runs/queue.r0_val_bare.log)
+[2026-10-19 06:01:48] start r0_val_rules
+[2026-10-19 06:02:05] FAIL  r0_val_rules (see runs/queue.r0_val_rules.log)
+[2026-10-19 06:02:05] start r0_val_rules_strict
+[2026-10-19 06:02:21] FAIL  r0_val_rules_strict (see runs/queue.r0_val_rules_strict.log)
+[2026-10-19 06:02:21] start r0_choose
+[2026-10-19 06:02:28] FAIL  r0_choose (see runs/queue.r0_choose.log)
+[2026-10-19 06:02:28] start shots
+[2026-10-19 06:02:28] done  shots (0 min)
+[2026-10-19 06:02:28] start eval_A_test_id
+[2026-10-19 06:03:35] stopped: R0 generation OOM at batch 8 (fixing prefill logits)
