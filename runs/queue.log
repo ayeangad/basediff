@@ -64,3 +64,10 @@
 [2026-10-19 06:12:22] skip train_R4-rand (exists: runs/R4-rand/adapter)
 [2026-10-19 06:12:22] skip r0_val_bare (exists: runs/R0/val_bare.preds.jsonl)
 [2026-10-19 06:12:22] start r0_val_rules
+[2026-10-19 06:20:06] done  r0_val_rules (7 min)
+[2026-10-19 06:20:06] start r0_val_rules_strict
+[2026-10-19 06:27:55] done  r0_val_rules_strict (7 min)
+[2026-10-19 06:27:55] start r0_choose
+[2026-10-19 06:28:03] done  r0_choose (0 min)
+[2026-10-19 06:28:03] skip shots (exists: data/shots.jsonl)
+[2026-10-19 06:28:03] start eval_A_test_id

@@ -77,6 +77,7 @@ def main():
     ap.add_argument("--shots-from", help="jsonl to draw few-shot examples from")
     ap.add_argument("--k-shots", type=int, default=0)
     ap.add_argument("--save-topk", type=int, default=0, help="also save top-k log-probs per step")
+    ap.add_argument("--max-new", type=int, default=96, help="untuned models write long, pretty-printed JSON")
     a = ap.parse_args()
 
     if a.r0:
@@ -85,7 +86,8 @@ def main():
     rows = load(a.data)[:a.limit] if a.limit else load(a.data)
     shots = few_shot_examples(a.shots_from, a.k_shots) if a.shots_from and a.k_shots else None
     t0 = time.time()
-    outs = run(a.base, a.adapter, rows, a.batch_size, system=a.system, shots=shots, topk=a.save_topk)
+    outs = run(a.base, a.adapter, rows, a.batch_size, max_new=a.max_new, system=a.system, shots=shots,
+               topk=a.save_topk)
     if a.save_topk:  # old-model logs for KD (R2-KD) and confidence-based selection (R4)
         outs, dists = outs
         torch.save({r["id"]: d for r, d in zip(rows, dists)}, Path(a.out).with_suffix(".topk.pt"))
@@ -96,7 +98,7 @@ def main():
             f.write(json.dumps({"id": r["id"], "raw": o, "pred": parse_output(o)}, ensure_ascii=False) + "\n")
     meta = {"base": a.base, "adapter": a.adapter, "data": a.data, "n": len(rows),
             "minutes": round((time.time() - t0) / 60, 2), "k_shots": a.k_shots,
-            "system_override": bool(a.system), "r0": a.r0}
+            "system_override": bool(a.system), "r0": a.r0, "max_new": a.max_new}
     out.with_suffix(".meta.json").write_text(json.dumps(meta, indent=2))
     print(json.dumps(meta))
 

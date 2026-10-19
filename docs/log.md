@@ -52,6 +52,8 @@ Qwen3-0.6B, fp32, grad ckpt on: micro-batch 2 → 302 tok/s, 2.90 GB; micro-batc
 
 **D12b (06:12):** the rules prompt at batch 3 still ran out of memory over a full pass. The test measured allocated tensors only; the CUDA context (~0.3 GB) and fragmentation across batches use the rest. Final settings: rules-prompt R0 at batch 2, fine-tuned Qwen3 at batch 4, bare R0 at batch 6 (completed on val), 3-shot R0b at batch 1.
 
+**D13 (06:30): R0 scored 0% on val because its answers were cut off, not because they were wrong.** Untuned Qwen3 writes pretty-printed JSON in a ```json block, and the 96-token output limit cut it mid-answer: valid JSON was 0–6%. Fine-tuned models write compact JSON (A: 100% valid). All R0 runs (val variants, R0a, R0b) now use `--max-new 256`; bare R0 batch lowered to 4 for the longer generation. The R0 val outputs were deleted and re-run. The variant choice still uses val only.
+
 ## PREREG
 
 Written before the overnight run. Committed and tagged `prereg` together with the frozen code: data generator, validators (`portcheck/validators.py`), R4 selection rule (`portcheck/recipes.py`), configs and statistics.
