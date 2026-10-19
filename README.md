@@ -1,10 +1,10 @@
-# portcheck
+# basediff
 
 **What breaks when you move a fine-tuned specialist model onto a new base model, and how to catch it before you ship.**
 
 A specialist is a small model fine-tuned for one job. When a better base model ships (Qwen2.5 → Qwen3 → …), the specialist must be rebuilt on it. That rebuild can quietly break cases the old model got right, while the overall score goes up.
 
-portcheck:
+basediff:
 1. rebuilds a specialist on a new base six different ways;
 2. compares old and new **ticket by ticket**: fixes, negative flips (old right → new wrong), copied errors and per-slice changes, all against a seed-noise floor;
 3. gives a SHIP / REVIEW / BLOCK verdict.
@@ -63,13 +63,13 @@ gold_train ──► A (Qwen2.5 + LoRA) ──► A's logs on 1,500 production i
 
 | Path | What it does |
 |---|---|
-| `portcheck/data_gen.py` | Synthetic tickets: ambiguous purpose codes, held-out wordings, interacting risk rules, policy drift |
-| `portcheck/train.py` | LoRA SFT, loss on answer tokens only; optional KL to the old model's top-20 (R2-KD) |
-| `portcheck/generate.py` | Batched greedy generation; can save top-k log-probs |
-| `portcheck/validators.py` | Cheap rule checks on logged answers (no model) |
-| `portcheck/recipes.py` | Builds each rebuild's training file from the old model's logs |
-| `portcheck/eval/` | Scoring, migration diff, paired statistics, off-task (ARC-Easy) |
-| `portcheck/report.py` | Rebuilds every table from saved predictions (CPU, ~15 s) |
+| `basediff/data_gen.py` | Synthetic tickets: ambiguous purpose codes, held-out wordings, interacting risk rules, policy drift |
+| `basediff/train.py` | LoRA SFT, loss on answer tokens only; optional KL to the old model's top-20 (R2-KD) |
+| `basediff/generate.py` | Batched greedy generation; can save top-k log-probs |
+| `basediff/validators.py` | Cheap rule checks on logged answers (no model) |
+| `basediff/recipes.py` | Builds each rebuild's training file from the old model's logs |
+| `basediff/eval/` | Scoring, migration diff, paired statistics, off-task (ARC-Easy) |
+| `basediff/report.py` | Rebuilds every table from saved predictions (CPU, ~15 s) |
 | `scripts/overnight.sh` | The whole GPU pipeline as one resumable queue |
 | `docs/log.md` | Every decision, finding and the pre-registration |
 
@@ -77,16 +77,16 @@ gold_train ──► A (Qwen2.5 + LoRA) ──► A's logs on 1,500 production i
 
 ```bash
 uv venv --python 3.12 && uv pip install -r requirements.lock
-python -m portcheck.data_gen --out data      # synthetic data (seeded; hashes in data/MANIFEST.json)
+python -m basediff.data_gen --out data      # synthetic data (seeded; hashes in data/MANIFEST.json)
 pytest                                       # fast tests; `pytest -m slow` checks no row is truncated
 bash scripts/overnight.sh                    # train, generate logs, rebuild, evaluate (~8 h on a 4 GB GPU)
-python -m portcheck.report                   # tables -> results/
+python -m basediff.report                   # tables -> results/
 ```
 
 Compare any two models on any labelled test set:
 
 ```bash
-python -m portcheck.eval.diff --old runs/A/test_id.preds.jsonl --new runs/R1-log/test_id.preds.jsonl \
+python -m basediff.eval.diff --old runs/A/test_id.preds.jsonl --new runs/R1-log/test_id.preds.jsonl \
     --gold data/test_id.jsonl --out diff.json
 ```
 
