@@ -1,0 +1,50 @@
+{
+  "n": 600,
+  "all_correct": 0.6233333333333333,
+  "valid_json": 1.0,
+  "beneficiary_name": 0.9883333333333333,
+  "account_last4": 1.0,
+  "amount": 0.9983333333333333,
+  "currency": 1.0,
+  "value_date": 1.0,
+  "purpose_code": 0.8233333333333334,
+  "risk_flag": 0.7633333333333333,
+  "slices": {
+    "new_template=False": {
+      "n": 600,
+      "all_correct": 0.6233333333333333
+    },
+    "heldout_wording=True": {
+      "n": 239,
+      "all_correct": 0.6108786610878661
+    },
+    "heldout_wording=False": {
+      "n": 361,
+      "all_correct": 0.631578947368421
+    },
+    "ambiguous_purpose=True": {
+      "n": 142,
+      "all_correct": 0.44366197183098594
+    },
+    "ambiguous_purpose=False": {
+      "n": 458,
+      "all_correct": 0.6790393013100436
+    },
+    "policy_affected=True": {
+      "n": 56,
+      "all_correct": 0.017857142857142856
+    },
+    "policy_affected=False": {
+      "n": 544,
+      "all_correct": 0.6856617647058824
+    },
+    "hard=True": {
+      "n": 317,
+      "all_correct": 0.4353312302839117
+    },
+    "hard=False": {
+      "n": 283,
+      "all_correct": 0.833922261484099
+    }
+  }
+}

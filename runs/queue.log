@@ -71,3 +71,14 @@
 [2026-10-19 06:28:03] done  r0_choose (0 min)
 [2026-10-19 06:28:03] skip shots (exists: data/shots.jsonl)
 [2026-10-19 06:28:03] start eval_A_test_id
+[2026-10-19 06:32:27] skip train_A (exists: runs/A/adapter)
+[2026-10-19 06:32:27] skip train_A_prime (exists: runs/A_prime/adapter)
+[2026-10-19 06:32:27] skip logs_A (exists: runs/A/logs.preds.topk.pt)
+[2026-10-19 06:32:27] skip recipes (exists: data/recipes/recipes_stats.json)
+[2026-10-19 06:32:27] skip train_R1-log (exists: runs/R1-log/adapter)
+[2026-10-19 06:32:27] skip train_R2 (exists: runs/R2/adapter)
+[2026-10-19 06:32:27] skip train_R2-KD (exists: runs/R2-KD/adapter)
+[2026-10-19 06:32:27] skip train_R3 (exists: runs/R3/adapter)
+[2026-10-19 06:32:27] skip train_R4 (exists: runs/R4/adapter)
+[2026-10-19 06:32:27] skip train_R4-rand (exists: runs/R4-rand/adapter)
+[2026-10-19 06:32:27] start r0_val_bare

@@ -54,6 +54,12 @@ Qwen3-0.6B, fp32, grad ckpt on: micro-batch 2 → 302 tok/s, 2.90 GB; micro-batc
 
 **D13 (06:30): R0 scored 0% on val because its answers were cut off, not because they were wrong.** Untuned Qwen3 writes pretty-printed JSON in a ```json block, and the 96-token output limit cut it mid-answer: valid JSON was 0–6%. Fine-tuned models write compact JSON (A: 100% valid). All R0 runs (val variants, R0a, R0b) now use `--max-new 256`; bare R0 batch lowered to 4 for the longer generation. The R0 val outputs were deleted and re-run. The variant choice still uses val only.
 
+**D14 (06:35): G1 MISSED on test_id, reported as-is and not tuned.** A scores 62.3% all-fields-correct on test_id (n = 600). The pre-registered G1 target was 80–90%.
+- Breakdown: policy-affected 2% (n = 56, A applies the stale 50k threshold, by design); held-out wordings 61% (n = 239; purpose_code 82% overall vs 94.5% on val); ambiguous purpose 44% (n = 142).
+- On rows with neither held-out wording nor policy effect: 70.3% [65.1, 75.0] (227/323), below val's 79.5%. test_id has more risky tickets (40% vs 29%), and A is weakest on those.
+- Interpretation: A is a moderately weak specialist, and test_id adds the designed drift on top.
+- Test results have now been seen, so the task stays frozen; changing it would be tuning on test. Every comparison is paired against this same A, so the rebuild ranking and flip analysis stay valid. All claims about absolute accuracy must say that A sits below the planned operating point.
+
 ## PREREG
 
 Written before the overnight run. Committed and tagged `prereg` together with the frozen code: data generator, validators (`portcheck/validators.py`), R4 selection rule (`portcheck/recipes.py`), configs and statistics.
