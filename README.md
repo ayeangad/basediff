@@ -86,9 +86,21 @@ python -m basediff.report                   # tables -> results/
 Compare any two models on any labelled test set:
 
 ```bash
-python -m basediff.eval.diff --old runs/A/test_id.preds.jsonl --new runs/R1-log/test_id.preds.jsonl \
-    --gold data/test_id.jsonl --out diff.json
+basediff diff --old runs/A/test_id.preds.jsonl --new runs/R1-log/test_id.preds.jsonl --gold data/test_id.jsonl
 ```
+
+```
+tickets        600
+accuracy       old 62.3%  new 73.2%  (change +10.8%, 95% CI +6.2% to +15.5%)
+fixed          144
+broken         79  (13.2%, 95% CI 10.7%-16.1%)
+same mistake   49  (22% of the old model's mistakes)
+McNemar p      1.6e-05
+  slice ambiguous_purpose  n=142  broken 26  (18.3%)
+  ...
+```
+
+Add `--out diff.json` for the full result, including per-slice intervals and the broken ticket ids.
 
 **Hardware notes (GTX 1650 Ti):**
 - Train and evaluate in **fp32**: fp16 autocast measured about 4× slower on this card.
