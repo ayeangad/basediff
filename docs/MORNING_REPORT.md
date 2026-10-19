@@ -68,7 +68,7 @@ PENDING_EXTRA
 
 ## 4. What it means (plain words)
 
-1. **Fine-tuning still matters at this size.** The new base with written rules scores 0%; with 3 worked examples it scores 3.3% against A's 63.0% on the same 300 rows. Examples help with formats (last-4 digits 1% → 25%, dates 97%), but not with the rules (risk_flag 45%, purpose_code 50%).
+1. **Fine-tuning still matters at this size.** The new base with written rules scores 0%; with 3 worked examples it scores 3.3% against A's 63.0% on the same 300 rows. Examples help with formats (last-4 digits 1% → 25%, dates 97%), but not with the rules (risk_flag 45%, purpose_code 50%). Caveat: one of the 3 examples had `changed_bank_details`, and the model copied that reason onto 176/300 tickets (few-shot copying), which inflates false risk flags. Other examples might score higher, but last-4 accuracy (25%) alone caps all-fields-correct at 25%, far below A's 63%. The conclusion does not depend on the choice of examples.
 2. **Accuracy hides regressions.** The best rebuild (R1-log, +10.8 points) still breaks 79 tickets the old model got right (13.2%), about 6× the seed-noise floor (2.0%). Most of these (57/79) are `risk_flag`. Under the pre-registered gate, **no rebuild would SHIP.** Every one has a flip rate far above the floor, which is exactly what the diff report is for.
 3. **Rebuilding from the old model's logs does not work here.**
    - R2, R2-KD and R3 all score *below* the model they replace.
