@@ -1,4 +1,4 @@
-# portcheck log
+# basediff log (formerly portcheck)
 
 Plan: `~/Downloads/projects/companies/hyde2/PORT_PLAN.md` (v2, LEAN mode).
 
@@ -116,4 +116,6 @@ These are descriptive pipeline facts, not pre-registered hypotheses.
 - Pre-registered: H1 and H3 supported; H2, H4, H6 and H7 not supported; H5 direction as predicted; H8 partly supported.
 
 **F3 (exploratory):** R0b copied the `changed_bank_details` reason from one of its 3 examples onto 176/300 tickets. On test_drift's policy slice (n = 14), R4 reaches 79% vs 0% on test_id's policy slice, which is consistent with corrected labels winning only where stale log examples are sparse (new formats). The n is too small to claim.
+
+**D15 (2026-10-19): renamed portcheck → basediff.** The name says what the tool outputs (a per-example diff after a base-model change) and avoids "migration", which Hyde uses for a different thing. Python package, imports, tests and queue script are renamed; `results/table.md` rebuilds byte-identical afterwards. Earlier entries keep the old name.
 
