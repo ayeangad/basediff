@@ -1,10 +1,10 @@
-"""Data checks from PORT_PLAN v2 §5.1. Run after `python -m portcheck.data_gen --out data`."""
+"""Data checks from PORT_PLAN v2 §5.1. Run after `python -m basediff.data_gen --out data`."""
 import json
 from pathlib import Path
 
 import pytest
 
-from portcheck.data_gen import HELDOUT, NEW_TEMPLATES, OUTPUT_KEYS, POLICY
+from basediff.data_gen import HELDOUT, NEW_TEMPLATES, OUTPUT_KEYS, POLICY
 
 DATA = Path(__file__).resolve().parents[1] / "data"
 SPLITS = ["gold_train", "log_inputs", "test_id", "test_drift", "val"]
@@ -57,7 +57,7 @@ def test_gold_schema_and_last4(splits):
 def test_no_row_truncated():
     """TRL-style truncation cuts the end of the sequence, i.e. the JSON answer."""
     from transformers import AutoTokenizer
-    from portcheck.common import render_prompt, render_target
+    from basediff.common import render_prompt, render_target
     for base in ["Qwen/Qwen2.5-0.5B-Instruct", "Qwen/Qwen3-0.6B"]:
         tok = AutoTokenizer.from_pretrained(base)
         for s in SPLITS:

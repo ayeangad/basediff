@@ -6,8 +6,8 @@ import pytest
 import torch
 from transformers import AutoTokenizer
 
-from portcheck.common import render_target
-from portcheck.train import collate, encode
+from basediff.common import render_target
+from basediff.train import collate, encode
 
 DATA = Path(__file__).resolve().parents[1] / "data"
 OLD, NEW = "Qwen/Qwen2.5-0.5B-Instruct", "Qwen/Qwen3-0.6B"
