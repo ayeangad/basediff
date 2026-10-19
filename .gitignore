@@ -9,3 +9,4 @@ data/**/*.jsonl
 runs/**/*.topk.pt
 runs/queue.*.log
 runs/queue.stdout
+*.egg-info/
