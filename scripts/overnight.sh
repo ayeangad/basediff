@@ -27,20 +27,20 @@ step() {  # step NAME DONE_FILE CMD...
 gen() {  # gen BASE ADAPTER(or -) DATA OUT [extra args]
   local base=$1 adapter=$2 data=$3 out=$4; shift 4
   local a=(); [ "$adapter" != "-" ] && a=(--adapter "$adapter")
-  $PY -m portcheck.generate --base "$base" "${a[@]}" --data "$data" --out "$out" "$@"
+  $PY -m basediff.generate --base "$base" "${a[@]}" --data "$data" --out "$out" "$@"
 }
 
 # 1. old specialist A (seed 0) and A' (seed 1)
-step train_A        runs/A/adapter        $PY -m portcheck.train configs/A.yaml
-step train_A_prime  runs/A_prime/adapter  $PY -m portcheck.train configs/A_prime.yaml
+step train_A        runs/A/adapter        $PY -m basediff.train configs/A.yaml
+step train_A_prime  runs/A_prime/adapter  $PY -m basediff.train configs/A_prime.yaml
 
 # 2. A's production logs with top-20 log-probs, then the recipe training files
 step logs_A         runs/A/logs.preds.topk.pt  gen $OLD runs/A/adapter data/log_inputs.jsonl runs/A/logs.preds.jsonl --save-topk 20 --batch-size 8
-step recipes        data/recipes/recipes_stats.json  $PY -m portcheck.recipes
+step recipes        data/recipes/recipes_stats.json  $PY -m basediff.recipes
 
 # 3. rebuild recipes on the new base
 for R in R1-log R2 R2-KD R3 R4 R4-rand; do
-  step "train_$R" "runs/$R/adapter" $PY -m portcheck.train "configs/$R.yaml"
+  step "train_$R" "runs/$R/adapter" $PY -m basediff.train "configs/$R.yaml"
 done
 
 # 4. R0: choose the prompt variant on val (excluding policy-affected rows), then test
@@ -48,7 +48,7 @@ for V in bare rules rules_strict; do
   BS=2; [ "$V" = bare ] && BS=4   # fp32 KV cache: long rules prompts need small batches (D12)
   step "r0_val_$V" "runs/R0/val_$V.preds.jsonl" gen $NEW - data/val.jsonl "runs/R0/val_$V.preds.jsonl" --r0 "$V" --batch-size $BS --max-new 256
 done
-step r0_choose runs/R0/choice.json $PY -m portcheck.eval.choose_r0
+step r0_choose runs/R0/choice.json $PY -m basediff.eval.choose_r0
 R0V=$(cat runs/R0/choice.json 2>/dev/null | $PY -c "import json,sys; print(json.load(sys.stdin)['variant'])" 2>/dev/null || echo rules)
 R0BS=2; [ "$R0V" = bare ] && R0BS=4
 step shots data/shots.jsonl $PY -c "
@@ -71,11 +71,11 @@ done
 step eval_R0b_test_id_300 runs/R0b/test_id_300.preds.jsonl gen $NEW - data/test_id_300.jsonl runs/R0b/test_id_300.preds.jsonl --r0 "$R0V" --shots-from data/shots.jsonl --k-shots 3 --batch-size 1 --max-new 256
 
 # 6. off-task retention (ARC-Easy, 500 items, paired)
-step offtask_B runs/offtask/B.json $PY -m portcheck.eval.offtask --base $NEW --out runs/offtask/B.json --batch-size 4
+step offtask_B runs/offtask/B.json $PY -m basediff.eval.offtask --base $NEW --out runs/offtask/B.json --batch-size 4
 for R in R1-log R2 R2-KD R3 R4; do
-  step "offtask_$R" "runs/offtask/$R.json" $PY -m portcheck.eval.offtask --base $NEW --adapter "runs/$R/adapter" --out "runs/offtask/$R.json" --batch-size 4
+  step "offtask_$R" "runs/offtask/$R.json" $PY -m basediff.eval.offtask --base $NEW --adapter "runs/$R/adapter" --out "runs/offtask/$R.json" --batch-size 4
 done
 
 # 7. tables (CPU only)
-step report results/summary.json $PY -m portcheck.report
+step report results/summary.json $PY -m basediff.report
 say "queue finished"
