@@ -9,10 +9,10 @@ an exact McNemar test of fixes vs flips.
 import json
 from collections import Counter
 
-from portcheck.common import _norm
-from portcheck.data_gen import FIELDS
-from portcheck.eval.stats import mcnemar_exact, paired_bootstrap, wilson
-from portcheck.eval.task import graded_rows
+from basediff.common import _norm
+from basediff.data_gen import FIELDS
+from basediff.eval.stats import mcnemar_exact, paired_bootstrap, wilson
+from basediff.eval.task import graded_rows
 
 
 def _same_answer(p, q) -> bool:
@@ -22,7 +22,7 @@ def _same_answer(p, q) -> bool:
 
 
 def compare(old: list[dict], new: list[dict]) -> dict:
-    """old/new: graded rows (portcheck.eval.task.graded_rows) over the same items."""
+    """old/new: graded rows (basediff.eval.task.graded_rows) over the same items."""
     assert [r["id"] for r in old] == [r["id"] for r in new]
     n = len(old)
     kinds = []

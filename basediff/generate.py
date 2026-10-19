@@ -11,8 +11,8 @@ from pathlib import Path
 
 import torch
 
-from portcheck.common import load_model, load_tokenizer, parse_output, render_prompt
-from portcheck.data_gen import load
+from basediff.common import load_model, load_tokenizer, parse_output, render_prompt
+from basediff.data_gen import load
 
 
 def few_shot_examples(path: str, k: int) -> list:
@@ -73,7 +73,7 @@ def main():
     ap.add_argument("--batch-size", type=int, default=16)
     ap.add_argument("--limit", type=int)
     ap.add_argument("--system", help="override system prompt (prompt-only baselines)")
-    ap.add_argument("--r0", help="named R0 system prompt from portcheck.prompts.R0_VARIANTS")
+    ap.add_argument("--r0", help="named R0 system prompt from basediff.prompts.R0_VARIANTS")
     ap.add_argument("--shots-from", help="jsonl to draw few-shot examples from")
     ap.add_argument("--k-shots", type=int, default=0)
     ap.add_argument("--save-topk", type=int, default=0, help="also save top-k log-probs per step")
@@ -81,7 +81,7 @@ def main():
     a = ap.parse_args()
 
     if a.r0:
-        from portcheck.prompts import R0_VARIANTS
+        from basediff.prompts import R0_VARIANTS
         a.system = R0_VARIANTS[a.r0]
     rows = load(a.data)[:a.limit] if a.limit else load(a.data)
     shots = few_shot_examples(a.shots_from, a.k_shots) if a.shots_from and a.k_shots else None

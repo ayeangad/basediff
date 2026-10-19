@@ -5,7 +5,7 @@ import re
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from portcheck.data_gen import FIELDS, SYSTEM_PROMPT
+from basediff.data_gen import FIELDS, SYSTEM_PROMPT
 
 
 def load_tokenizer(base: str):

@@ -20,9 +20,9 @@ from pathlib import Path
 
 import torch
 
-from portcheck.common import grade, load_tokenizer
-from portcheck.data_gen import load
-from portcheck.validators import check
+from basediff.common import grade, load_tokenizer
+from basediff.data_gen import load
+from basediff.validators import check
 
 LABEL_BUDGET = 200
 SELECT_FIELDS = ("purpose_code", "risk_flag")

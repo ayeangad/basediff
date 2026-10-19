@@ -17,8 +17,8 @@ import torch
 import yaml
 from peft import LoraConfig, get_peft_model
 
-from portcheck.common import load_tokenizer, render_prompt, render_target
-from portcheck.data_gen import load
+from basediff.common import load_tokenizer, render_prompt, render_target
+from basediff.data_gen import load
 
 TARGETS = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 

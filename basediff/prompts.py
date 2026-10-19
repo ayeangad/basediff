@@ -3,7 +3,7 @@
 R0 gets the CURRENT written policy, as a team prompting a new base model today would.
 Variants are compared on the validation split only (PORT_PLAN v2 §5.3).
 """
-from portcheck.data_gen import OUTPUT_KEYS, FX_THRESHOLD, POLICY, PURPOSES, SYSTEM_PROMPT
+from basediff.data_gen import OUTPUT_KEYS, FX_THRESHOLD, POLICY, PURPOSES, SYSTEM_PROMPT
 
 _CODES = {
     "SUPP": "suppliers / goods", "SALA": "salary, payroll", "RENT": "rent, leases",

@@ -1,13 +1,13 @@
 """Task accuracy for one predictions file against its gold split, overall and per slice.
 
-Usage: python -m portcheck.eval.task --preds runs/A/test_id.preds.jsonl --gold data/test_id.jsonl
+Usage: python -m basediff.eval.task --preds runs/A/test_id.preds.jsonl --gold data/test_id.jsonl
 """
 import argparse
 import json
 from pathlib import Path
 
-from portcheck.common import grade
-from portcheck.data_gen import FIELDS, load
+from basediff.common import grade
+from basediff.data_gen import FIELDS, load
 
 
 def graded_rows(preds_path, gold_path) -> list[dict]:

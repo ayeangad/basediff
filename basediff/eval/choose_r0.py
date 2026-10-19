@@ -3,8 +3,8 @@ policy while the R0 prompt states the new one). Never looks at the test splits."
 import json
 from pathlib import Path
 
-from portcheck.eval.task import graded_rows
-from portcheck.prompts import R0_VARIANTS
+from basediff.eval.task import graded_rows
+from basediff.prompts import R0_VARIANTS
 
 scores = {}
 for v in R0_VARIANTS:

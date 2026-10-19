@@ -13,7 +13,7 @@ By design they cannot catch:
 import re
 from datetime import date
 
-from portcheck.data_gen import CURRENCIES, FIELDS, FX_THRESHOLD, LOCAL_CCY, PURPOSES, WATCHLIST
+from basediff.data_gen import CURRENCIES, FIELDS, FX_THRESHOLD, LOCAL_CCY, PURPOSES, WATCHLIST
 
 _NUM = re.compile(r"\d[\d.,']*\d|\d")
 

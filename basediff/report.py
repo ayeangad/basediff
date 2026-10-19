@@ -7,9 +7,9 @@ for each model, with paired statistics and Holm-adjusted McNemar p-values.
 import json
 from pathlib import Path
 
-from portcheck.eval.diff import diff_files
-from portcheck.eval.stats import holm, paired_bootstrap
-from portcheck.eval.task import graded_rows, summarize
+from basediff.eval.diff import diff_files
+from basediff.eval.stats import holm, paired_bootstrap
+from basediff.eval.task import graded_rows, summarize
 
 MODELS = ["A_prime", "R0a", "R1-log", "R2", "R2-KD", "R3", "R4", "R4-rand"]
 LABELS = {"A_prime": 0, "R0a": 0, "R0b": 0, "R1-log": 1500, "R2": 0, "R2-KD": 0, "R3": 0, "R4": 200, "R4-rand": 200}
