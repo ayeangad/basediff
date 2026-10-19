@@ -76,7 +76,7 @@ gold_train ──► A (Qwen2.5 + LoRA) ──► A's logs on 1,500 production i
 ## Run it
 
 ```bash
-uv venv --python 3.12 && uv pip install -r requirements.lock
+uv venv --python 3.12 && uv pip install -r requirements.lock && uv pip install -e . --no-deps
 python -m basediff.data_gen --out data      # synthetic data (seeded; hashes in data/MANIFEST.json)
 pytest                                       # fast tests; `pytest -m slow` checks no row is truncated
 bash scripts/overnight.sh                    # train, generate logs, rebuild, evaluate (~8 h on a 4 GB GPU)
