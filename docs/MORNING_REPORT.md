@@ -1,4 +1,4 @@
-# MORNING REPORT: portcheck (PORT_PLAN v2, LEAN)
+# MORNING REPORT: basediff (formerly portcheck) (PORT_PLAN v2, LEAN)
 
 Date: 2026-10-19. Everything below comes from files in this repo (`results/summary.json`, `results/table.md`, `data/recipes/recipes_stats.json`). All comparisons are paired on the same items.
 
