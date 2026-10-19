@@ -106,3 +106,14 @@ Written before the overnight run. Committed and tagged `prereg` together with th
 - **The R4 selection rule (A's lowest confidence on `purpose_code` and `risk_flag`) picked 141/200 wrong rows (70.5%).** Random selection picked 69/200 (34.5%). Confidence-targeted labelling finds errors at about twice the random rate.
 
 These are descriptive pipeline facts, not pre-registered hypotheses.
+
+**F2 (queue finished 2026-10-19 10:08; `results/table.md`, `results/summary.json`):** the full results and the hypothesis scorecard are in `docs/MORNING_REPORT.md`. Headlines:
+- R1-log is +10.8 points on test_id but has 13.2% negative flips, against a 2.0% seed floor.
+- Log-only rebuilds score below A and copy ~80% of its errors.
+- 200 labels recover 73% of the full relabel's gain on new formats.
+- Prompt-only scores 0% (zero-shot) and 3.3% (3-shot).
+- Off-task ARC-Easy shows no detectable loss.
+- Pre-registered: H1 and H3 supported; H2, H4, H6 and H7 not supported; H5 direction as predicted; H8 partly supported.
+
+**F3 (exploratory):** R0b copied the `changed_bank_details` reason from one of its 3 examples onto 176/300 tickets. On test_drift's policy slice (n = 14), R4 reaches 79% vs 0% on test_id's policy slice, which is consistent with corrected labels winning only where stale log examples are sparse (new formats). The n is too small to claim.
+

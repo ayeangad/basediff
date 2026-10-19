@@ -12,7 +12,7 @@ Date: 2026-10-19. Everything below comes from files in this repo (`results/summa
 | R0a (zero-shot prompt with the written rules) | done |
 | R0b (3-shot, 300-row subset) | done (23 min at batch 1) |
 | Scoring on test_id (600) and test_drift (200) | done |
-| Off-task ARC-Easy (500 items, paired) | PENDING_OFFTASK |
+| Off-task ARC-Easy (500 items, paired) | done (~1 min per model) |
 
 **Problems hit and fixed overnight** (details in `docs/log.md` D1–D14):
 - fp16 is 4× slower than fp32 on this GPU, so everything runs in fp32.
@@ -30,7 +30,7 @@ Date: 2026-10-19. Everything below comes from files in this repo (`results/summa
   - Policy-affected rows: 2%, which is the designed stale-policy effect.
   - The task was frozen once test results had been seen. Every comparison is paired against the same A, so the rankings stand. Absolute accuracies are low; say so.
 - **G2: results reported as they came out.** See below.
-- **G3:** `python -m portcheck.report` rebuilds every table from saved predictions in seconds, and 8 tests pass. The fresh-clone rebuild test is still TODO.
+- **G3 (partial):** `python -m portcheck.report` rebuilds every table from the saved predictions in ~15 s; the final `results/table.md` matches the draft numbers exactly, and 8 tests pass. A fresh-clone rebuild was not done: the predictions and adapters are gitignored and would need to be shipped as a release artifact.
 
 ## 3. Results
 
@@ -64,7 +64,20 @@ Date: 2026-10-19. Everything below comes from files in this repo (`results/summa
 - Validators: precision 98.9%, recall 46.1% at finding A's errors.
 - Confidence-based selection picked 70.5% wrong rows, against 34.5% for random selection. It also over-sampled new-format tickets (63/200 vs 44/200).
 
-PENDING_EXTRA
+### Off-task retention (ARC-Easy, 500 items, paired against untuned Qwen3-0.6B at 60.8%)
+
+| Model | Accuracy | Δ [95% CI] |
+|---|---|---|
+| R1-log | 60.2% | −0.6 [−3.6, +2.2] |
+| R2 | 58.4% | −2.4 [−5.2, +0.2] |
+| R2-KD | 59.6% | −1.2 [−4.0, +1.2] |
+| R3 | 60.2% | −0.6 [−3.0, +1.8] |
+| R4 | 60.6% | −0.2 [−2.6, +2.2] |
+
+No rebuild shows a detectable loss of general ability; every CI includes 0. This is consistent with LoRA forgetting little (Biderman et al. 2024). Descriptive only, as pre-registered.
+
+### Prompt-only, 3-shot (R0b, first 300 test_id rows)
+3.3% vs A's 63.0% on the same rows: Δ −59.7 [−65.0, −53.3].
 
 ## 4. What it means (plain words)
 

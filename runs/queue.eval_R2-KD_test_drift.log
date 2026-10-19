@@ -1,0 +1,2 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 70/311 [00:00<00:00, 691.64it/s]Loading weights:  51%|█████     | 158/311 [00:00<00:00, 783.11it/s]Loading weights:  81%|████████  | 252/311 [00:00<00:00, 853.10it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 856.59it/s]
+{"base": "Qwen/Qwen3-0.6B", "adapter": "runs/R2-KD/adapter", "data": "data/test_drift.jsonl", "n": 200, "minutes": 5.23, "k_shots": 0, "system_override": false, "r0": null, "max_new": 96}

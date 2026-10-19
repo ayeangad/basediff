@@ -1,0 +1,11 @@
+{
+  "base": "Qwen/Qwen3-0.6B",
+  "adapter": null,
+  "data": "data/test_drift.jsonl",
+  "n": 200,
+  "minutes": 9.35,
+  "k_shots": 0,
+  "system_override": true,
+  "r0": "rules",
+  "max_new": 256
+}

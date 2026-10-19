@@ -1,0 +1,2 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  30%|██▉       | 93/311 [00:00<00:00, 903.59it/s]Loading weights:  59%|█████▉    | 184/311 [00:00<00:00, 900.62it/s]Loading weights:  88%|████████▊ | 275/311 [00:00<00:00, 887.36it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 897.49it/s]
+{"base": "Qwen/Qwen3-0.6B", "adapter": "runs/R2/adapter", "data": "data/test_id.jsonl", "n": 600, "minutes": 13.78, "k_shots": 0, "system_override": false, "r0": null, "max_new": 96}

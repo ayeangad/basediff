@@ -1,0 +1,11 @@
+{
+  "base": "Qwen/Qwen3-0.6B",
+  "adapter": null,
+  "data": "data/val.jsonl",
+  "n": 200,
+  "minutes": 9.59,
+  "k_shots": 0,
+  "system_override": true,
+  "r0": "rules_strict",
+  "max_new": 256
+}

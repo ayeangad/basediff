@@ -1,0 +1,8 @@
+{
+  "variant": "rules",
+  "val_all_correct": {
+    "bare": 0.0,
+    "rules": 0.0,
+    "rules_strict": 0.0
+  }
+}

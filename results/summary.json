@@ -1,0 +1,2867 @@
+{
+  "test_id": {
+    "A": {
+      "n": 600,
+      "all_correct": 0.6233333333333333,
+      "valid_json": 1.0,
+      "beneficiary_name": 0.9883333333333333,
+      "account_last4": 1.0,
+      "amount": 0.9983333333333333,
+      "currency": 1.0,
+      "value_date": 1.0,
+      "purpose_code": 0.8233333333333334,
+      "risk_flag": 0.7633333333333333,
+      "slices": {
+        "new_template=False": {
+          "n": 600,
+          "all_correct": 0.6233333333333333
+        },
+        "heldout_wording=True": {
+          "n": 239,
+          "all_correct": 0.6108786610878661
+        },
+        "heldout_wording=False": {
+          "n": 361,
+          "all_correct": 0.631578947368421
+        },
+        "ambiguous_purpose=True": {
+          "n": 142,
+          "all_correct": 0.44366197183098594
+        },
+        "ambiguous_purpose=False": {
+          "n": 458,
+          "all_correct": 0.6790393013100436
+        },
+        "policy_affected=True": {
+          "n": 56,
+          "all_correct": 0.017857142857142856
+        },
+        "policy_affected=False": {
+          "n": 544,
+          "all_correct": 0.6856617647058824
+        },
+        "hard=True": {
+          "n": 317,
+          "all_correct": 0.4353312302839117
+        },
+        "hard=False": {
+          "n": 283,
+          "all_correct": 0.833922261484099
+        }
+      }
+    },
+    "models": {
+      "A_prime": {
+        "n": 600,
+        "counts": {
+          "both_right": 362,
+          "both_wrong_same": 173,
+          "fix": 26,
+          "flip": 12,
+          "both_wrong_diff": 27
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.6466666666666666,
+        "acc_diff": {
+          "diff": 0.023333333333333334,
+          "lo": 0.0033333333333333335,
+          "hi": 0.043333333333333335
+        },
+        "flip_rate": 0.02,
+        "flip_ci": [
+          0.011477178627043526,
+          0.03463005434610916
+        ],
+        "fix_rate": 0.043333333333333335,
+        "mcnemar_p": 0.03355243967962451,
+        "inherited": 0.7654867256637168,
+        "inherited_ci": [
+          0.7060945665455206,
+          0.8160044516895465
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 6,
+            "flip_rate": 0.02510460251046025,
+            "flip_ci": [
+              0.01155531970464068,
+              0.05367842949792411
+            ],
+            "fixes": 5,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.606694560669456
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 4,
+            "flip_rate": 0.028169014084507043,
+            "flip_ci": [
+              0.01100774180252639,
+              0.07018630902805872
+            ],
+            "fixes": 17,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.5352112676056338
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              6.938893903907228e-18,
+              0.06419393671876342
+            ],
+            "fixes": 3,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.07142857142857142
+          },
+          "hard": {
+            "n": 317,
+            "flips": 7,
+            "flip_rate": 0.022082018927444796,
+            "flip_ci": [
+              0.010736818226033513,
+              0.044871515205292235
+            ],
+            "fixes": 23,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.48580441640378547
+          }
+        },
+        "flip_fields": {
+          "amount": 1,
+          "purpose_code": 6,
+          "beneficiary_name": 1,
+          "account_last4": 1,
+          "risk_flag": 3
+        },
+        "flip_ids": [
+          3012,
+          3045,
+          3101,
+          3109,
+          3119,
+          3273,
+          3276,
+          3288,
+          3319,
+          3430,
+          3551,
+          3593
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.6466666666666666,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9883333333333333,
+          "account_last4": 0.9983333333333333,
+          "amount": 0.9966666666666667,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.8366666666666667,
+          "risk_flag": 0.7766666666666666,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.6466666666666666
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.606694560669456
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.6731301939058172
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.5352112676056338
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6812227074235808
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.07142857142857142
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.7058823529411765
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.48580441640378547
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8268551236749117
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 22.86,
+        "offtask": null
+      },
+      "R0a": {
+        "n": 600,
+        "counts": {
+          "flip": 374,
+          "both_wrong_diff": 226
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.0,
+        "acc_diff": {
+          "diff": -0.6233333333333333,
+          "lo": -0.665,
+          "hi": -0.5833333333333334
+        },
+        "flip_rate": 0.6233333333333333,
+        "flip_ci": [
+          0.5838929047691053,
+          0.6612045423141819
+        ],
+        "fix_rate": 0.0,
+        "mcnemar_p": 5.19770488282245e-113,
+        "inherited": 0.0,
+        "inherited_ci": [
+          0.0,
+          0.016713515657290345
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 146,
+            "flip_rate": 0.6108786610878661,
+            "flip_ci": [
+              0.5477789755326877,
+              0.6704704134200176
+            ],
+            "fixes": 0,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.0
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 63,
+            "flip_rate": 0.44366197183098594,
+            "flip_ci": [
+              0.3645010697878813,
+              0.5257907571769647
+            ],
+            "fixes": 0,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.0
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 1,
+            "flip_rate": 0.017857142857142856,
+            "flip_ci": [
+              0.0031592103419746734,
+              0.09445637149397576
+            ],
+            "fixes": 0,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 317,
+            "flips": 138,
+            "flip_rate": 0.4353312302839117,
+            "flip_ci": [
+              0.381848752075157,
+              0.490362276540963
+            ],
+            "fixes": 0,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.0
+          }
+        },
+        "flip_fields": {
+          "account_last4": 369,
+          "value_date": 122,
+          "purpose_code": 198,
+          "beneficiary_name": 59,
+          "amount": 100,
+          "risk_flag": 116,
+          "currency": 23
+        },
+        "flip_ids": [
+          3000,
+          3001,
+          3002,
+          3003,
+          3005,
+          3006,
+          3009,
+          3010,
+          3012,
+          3013,
+          3014,
+          3017,
+          3019,
+          3021,
+          3023,
+          3024,
+          3026,
+          3028,
+          3033,
+          3034,
+          3038,
+          3041,
+          3044,
+          3045,
+          3046,
+          3048,
+          3049,
+          3051,
+          3052,
+          3055
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.0,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.835,
+          "account_last4": 0.013333333333333334,
+          "amount": 0.7433333333333333,
+          "currency": 0.93,
+          "value_date": 0.685,
+          "purpose_code": 0.43333333333333335,
+          "risk_flag": 0.595,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.0
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.0
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.0
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.0
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.0
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.0
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.0
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.0
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": null,
+        "offtask": null,
+        "mcnemar_p_holm": 3.6383934179757147e-112
+      },
+      "R1-log": {
+        "n": 600,
+        "counts": {
+          "flip": 79,
+          "both_right": 295,
+          "fix": 144,
+          "both_wrong_diff": 33,
+          "both_wrong_same": 49
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.7316666666666667,
+        "acc_diff": {
+          "diff": 0.10833333333333334,
+          "lo": 0.06166666666666667,
+          "hi": 0.155
+        },
+        "flip_rate": 0.13166666666666665,
+        "flip_ci": [
+          0.10693910596672464,
+          0.1610806804467015
+        ],
+        "fix_rate": 0.24,
+        "mcnemar_p": 1.6001084645897152e-05,
+        "inherited": 0.2168141592920354,
+        "inherited_ci": [
+          0.16806398600729436,
+          0.2750303945419674
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 22,
+            "flip_rate": 0.09205020920502092,
+            "flip_ci": [
+              0.061574746966382723,
+              0.1354322182076267
+            ],
+            "fixes": 73,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.8242677824267782
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 26,
+            "flip_rate": 0.18309859154929578,
+            "flip_ci": [
+              0.12812565706492757,
+              0.2547658696123311
+            ],
+            "fixes": 37,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.5211267605633803
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              6.938893903907228e-18,
+              0.06419393671876342
+            ],
+            "fixes": 45,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.8214285714285714
+          },
+          "hard": {
+            "n": 317,
+            "flips": 46,
+            "flip_rate": 0.14511041009463724,
+            "flip_ci": [
+              0.110586402227079,
+              0.18813265725162825
+            ],
+            "fixes": 106,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.6246056782334385
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 57,
+          "purpose_code": 20,
+          "account_last4": 5
+        },
+        "flip_ids": [
+          3000,
+          3009,
+          3012,
+          3045,
+          3049,
+          3051,
+          3059,
+          3063,
+          3064,
+          3067,
+          3076,
+          3089,
+          3105,
+          3118,
+          3130,
+          3137,
+          3149,
+          3157,
+          3158,
+          3160,
+          3164,
+          3173,
+          3177,
+          3208,
+          3215,
+          3222,
+          3223,
+          3246,
+          3248,
+          3249
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.7316666666666667,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9916666666666667,
+          "account_last4": 0.99,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.9183333333333333,
+          "risk_flag": 0.8183333333333334,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.7316666666666667
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.8242677824267782
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.6703601108033241
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.5211267605633803
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.7969432314410481
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.8214285714285714
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.7224264705882353
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.6246056782334385
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8515901060070671
+            }
+          }
+        },
+        "labels": 1500,
+        "train_min": 33.48,
+        "offtask": {
+          "acc": 0.602,
+          "vs_untuned_B": {
+            "diff": -0.006,
+            "lo": -0.036,
+            "hi": 0.022
+          }
+        },
+        "mcnemar_p_holm": 8.000542322948576e-05
+      },
+      "R2": {
+        "n": 600,
+        "counts": {
+          "both_right": 320,
+          "both_wrong_same": 181,
+          "both_wrong_diff": 26,
+          "flip": 54,
+          "fix": 19
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.565,
+        "acc_diff": {
+          "diff": -0.058333333333333334,
+          "lo": -0.08666666666666667,
+          "hi": -0.03166666666666667
+        },
+        "flip_rate": 0.09,
+        "flip_ci": [
+          0.06963382183008099,
+          0.1155827730011536
+        ],
+        "fix_rate": 0.03166666666666667,
+        "mcnemar_p": 5.0622659111780655e-05,
+        "inherited": 0.8008849557522124,
+        "inherited_ci": [
+          0.7439854609331055,
+          0.8477267597333039
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 21,
+            "flip_rate": 0.08786610878661087,
+            "flip_ci": [
+              0.058187352452096844,
+              0.13058378672369725
+            ],
+            "fixes": 6,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.5481171548117155
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 14,
+            "flip_rate": 0.09859154929577464,
+            "flip_ci": [
+              0.059640338367060175,
+              0.15868892875746743
+            ],
+            "fixes": 8,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.4014084507042254
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 1,
+            "flip_rate": 0.017857142857142856,
+            "flip_ci": [
+              0.0031592103419746734,
+              0.09445637149397576
+            ],
+            "fixes": 0,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 317,
+            "flips": 46,
+            "flip_rate": 0.14511041009463724,
+            "flip_ci": [
+              0.110586402227079,
+              0.18813265725162825
+            ],
+            "fixes": 9,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.3186119873817035
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 35,
+          "purpose_code": 12,
+          "account_last4": 5,
+          "beneficiary_name": 2
+        },
+        "flip_ids": [
+          3045,
+          3055,
+          3063,
+          3089,
+          3105,
+          3126,
+          3134,
+          3149,
+          3193,
+          3207,
+          3219,
+          3222,
+          3234,
+          3246,
+          3248,
+          3259,
+          3262,
+          3272,
+          3276,
+          3278,
+          3283,
+          3288,
+          3291,
+          3294,
+          3302,
+          3320,
+          3325,
+          3329,
+          3337,
+          3347
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.565,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9883333333333333,
+          "account_last4": 0.9916666666666667,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.8233333333333334,
+          "risk_flag": 0.7066666666666667,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.565
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.5481171548117155
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.5761772853185596
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.4014084507042254
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6157205240174672
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.6231617647058824
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.3186119873817035
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8409893992932862
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 32.3,
+        "offtask": {
+          "acc": 0.584,
+          "vs_untuned_B": {
+            "diff": -0.024,
+            "lo": -0.052,
+            "hi": 0.002
+          }
+        },
+        "mcnemar_p_holm": 0.00020249063644712262
+      },
+      "R2-KD": {
+        "n": 600,
+        "counts": {
+          "both_right": 322,
+          "both_wrong_same": 179,
+          "both_wrong_diff": 27,
+          "flip": 52,
+          "fix": 20
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.57,
+        "acc_diff": {
+          "diff": -0.05333333333333334,
+          "lo": -0.08166666666666667,
+          "hi": -0.03
+        },
+        "flip_rate": 0.08666666666666667,
+        "flip_ci": [
+          0.06670240369849674,
+          0.11188993580616254
+        ],
+        "fix_rate": 0.03333333333333333,
+        "mcnemar_p": 0.00020771603022674048,
+        "inherited": 0.7920353982300885,
+        "inherited_ci": [
+          0.7344591496038317,
+          0.8398497704547421
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 20,
+            "flip_rate": 0.08368200836820083,
+            "flip_ci": [
+              0.054822696086418425,
+              0.12571261709116038
+            ],
+            "fixes": 6,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.5523012552301255
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 13,
+            "flip_rate": 0.09154929577464789,
+            "flip_ci": [
+              0.05428298632726473,
+              0.15033275916786865
+            ],
+            "fixes": 9,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.4154929577464789
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 1,
+            "flip_rate": 0.017857142857142856,
+            "flip_ci": [
+              0.0031592103419746734,
+              0.09445637149397576
+            ],
+            "fixes": 0,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 317,
+            "flips": 45,
+            "flip_rate": 0.14195583596214512,
+            "flip_ci": [
+              0.10781421598893029,
+              0.1846712351295877
+            ],
+            "fixes": 10,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.3249211356466877
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 35,
+          "purpose_code": 10,
+          "account_last4": 5,
+          "beneficiary_name": 2
+        },
+        "flip_ids": [
+          3045,
+          3055,
+          3063,
+          3089,
+          3105,
+          3126,
+          3134,
+          3149,
+          3193,
+          3207,
+          3219,
+          3222,
+          3234,
+          3246,
+          3248,
+          3259,
+          3262,
+          3272,
+          3276,
+          3278,
+          3283,
+          3291,
+          3294,
+          3302,
+          3320,
+          3325,
+          3329,
+          3337,
+          3347,
+          3362
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.57,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.99,
+          "account_last4": 0.9916666666666667,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.8266666666666667,
+          "risk_flag": 0.7066666666666667,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.57
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.5523012552301255
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.5817174515235457
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.4154929577464789
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6179039301310044
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.6286764705882353
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.3249211356466877
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8445229681978799
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 29.52,
+        "offtask": {
+          "acc": 0.596,
+          "vs_untuned_B": {
+            "diff": -0.012,
+            "lo": -0.04,
+            "hi": 0.012
+          }
+        },
+        "mcnemar_p_holm": 0.0006231480906802214
+      },
+      "R3": {
+        "n": 600,
+        "counts": {
+          "both_right": 307,
+          "both_wrong_same": 149,
+          "both_wrong_diff": 53,
+          "flip": 67,
+          "fix": 24
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.5516666666666666,
+        "acc_diff": {
+          "diff": -0.07166666666666667,
+          "lo": -0.10166666666666667,
+          "hi": -0.043333333333333335
+        },
+        "flip_rate": 0.11166666666666666,
+        "flip_ci": [
+          0.08889497508919378,
+          0.13937927936478045
+        ],
+        "fix_rate": 0.04,
+        "mcnemar_p": 7.348549184628524e-06,
+        "inherited": 0.6592920353982301,
+        "inherited_ci": [
+          0.5952996234399209,
+          0.7179597875011193
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 25,
+            "flip_rate": 0.10460251046025104,
+            "flip_ci": [
+              0.07186077766558435,
+              0.14985366550307092
+            ],
+            "fixes": 13,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.5606694560669456
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 14,
+            "flip_rate": 0.09859154929577464,
+            "flip_ci": [
+              0.059640338367060175,
+              0.15868892875746743
+            ],
+            "fixes": 6,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.3873239436619718
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 1,
+            "flip_rate": 0.017857142857142856,
+            "flip_ci": [
+              0.0031592103419746734,
+              0.09445637149397576
+            ],
+            "fixes": 0,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 317,
+            "flips": 55,
+            "flip_rate": 0.17350157728706625,
+            "flip_ci": [
+              0.1357909871882345,
+              0.21903054753217616
+            ],
+            "fixes": 7,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.28391167192429023
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 42,
+          "account_last4": 12,
+          "purpose_code": 11,
+          "beneficiary_name": 4
+        },
+        "flip_ids": [
+          3013,
+          3017,
+          3033,
+          3045,
+          3055,
+          3063,
+          3064,
+          3089,
+          3105,
+          3107,
+          3109,
+          3126,
+          3134,
+          3149,
+          3174,
+          3183,
+          3193,
+          3201,
+          3206,
+          3207,
+          3219,
+          3222,
+          3234,
+          3246,
+          3248,
+          3259,
+          3262,
+          3272,
+          3276,
+          3278
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.5516666666666666,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9833333333333333,
+          "account_last4": 0.975,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.825,
+          "risk_flag": 0.6933333333333334,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.5516666666666666
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.5606694560669456
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.5457063711911357
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.3873239436619718
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6026200873362445
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.6084558823529411
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.28391167192429023
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8515901060070671
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 23.61,
+        "offtask": {
+          "acc": 0.602,
+          "vs_untuned_B": {
+            "diff": -0.006,
+            "lo": -0.03,
+            "hi": 0.018
+          }
+        },
+        "mcnemar_p_holm": 4.409129510777114e-05
+      },
+      "R4": {
+        "n": 600,
+        "counts": {
+          "both_right": 308,
+          "both_wrong_same": 138,
+          "both_wrong_diff": 41,
+          "flip": 66,
+          "fix": 47
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.5916666666666667,
+        "acc_diff": {
+          "diff": -0.03166666666666667,
+          "lo": -0.06833333333333333,
+          "hi": 0.0016666666666666668
+        },
+        "flip_rate": 0.11,
+        "flip_ci": [
+          0.08740186474759913,
+          0.1375602620430874
+        ],
+        "fix_rate": 0.07833333333333334,
+        "mcnemar_p": 0.0899543329449645,
+        "inherited": 0.6106194690265486,
+        "inherited_ci": [
+          0.5457049535055112,
+          0.6718363040924333
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 22,
+            "flip_rate": 0.09205020920502092,
+            "flip_ci": [
+              0.061574746966382723,
+              0.1354322182076267
+            ],
+            "fixes": 34,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.6610878661087866
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 16,
+            "flip_rate": 0.11267605633802817,
+            "flip_ci": [
+              0.07055648914733137,
+              0.17519982123598477
+            ],
+            "fixes": 8,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.3873239436619718
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 1,
+            "flip_rate": 0.017857142857142856,
+            "flip_ci": [
+              0.0031592103419746734,
+              0.09445637149397576
+            ],
+            "fixes": 0,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 317,
+            "flips": 50,
+            "flip_rate": 0.15772870662460567,
+            "flip_ci": [
+              0.12173408798816318,
+              0.2019194049313011
+            ],
+            "fixes": 11,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.31230283911671924
+          }
+        },
+        "flip_fields": {
+          "purpose_code": 12,
+          "account_last4": 22,
+          "risk_flag": 35,
+          "beneficiary_name": 2
+        },
+        "flip_ids": [
+          3012,
+          3033,
+          3045,
+          3055,
+          3063,
+          3089,
+          3105,
+          3107,
+          3126,
+          3134,
+          3149,
+          3183,
+          3193,
+          3207,
+          3219,
+          3222,
+          3234,
+          3236,
+          3246,
+          3248,
+          3262,
+          3272,
+          3276,
+          3278,
+          3283,
+          3285,
+          3290,
+          3294,
+          3296,
+          3302
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.5916666666666667,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9883333333333333,
+          "account_last4": 0.95,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.8883333333333333,
+          "risk_flag": 0.7083333333333334,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.5916666666666667
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.6610878661087866
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.5457063711911357
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.3873239436619718
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6550218340611353
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.6525735294117647
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.31230283911671924
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.9045936395759717
+            }
+          }
+        },
+        "labels": 200,
+        "train_min": 25.32,
+        "offtask": {
+          "acc": 0.606,
+          "vs_untuned_B": {
+            "diff": -0.002,
+            "lo": -0.026,
+            "hi": 0.022
+          }
+        },
+        "mcnemar_p_holm": 0.179908665889929
+      },
+      "R4-rand": {
+        "n": 600,
+        "counts": {
+          "both_right": 321,
+          "both_wrong_same": 144,
+          "flip": 53,
+          "both_wrong_diff": 44,
+          "fix": 38
+        },
+        "old_acc": 0.6233333333333333,
+        "new_acc": 0.5983333333333334,
+        "acc_diff": {
+          "diff": -0.025,
+          "lo": -0.055,
+          "hi": 0.0033333333333333335
+        },
+        "flip_rate": 0.08833333333333333,
+        "flip_ci": [
+          0.06816693228172024,
+          0.11373753488622668
+        ],
+        "fix_rate": 0.06333333333333334,
+        "mcnemar_p": 0.14179337454474714,
+        "inherited": 0.6371681415929203,
+        "inherited_ci": [
+          0.5726729406876193,
+          0.6970782187338319
+        ],
+        "slices": {
+          "heldout_wording": {
+            "n": 239,
+            "flips": 19,
+            "flip_rate": 0.0794979079497908,
+            "flip_ci": [
+              0.0514822600041936,
+              0.12081722717516996
+            ],
+            "fixes": 24,
+            "old_acc": 0.6108786610878661,
+            "new_acc": 0.6317991631799164
+          },
+          "ambiguous_purpose": {
+            "n": 142,
+            "flips": 13,
+            "flip_rate": 0.09154929577464789,
+            "flip_ci": [
+              0.05428298632726473,
+              0.15033275916786865
+            ],
+            "fixes": 8,
+            "old_acc": 0.44366197183098594,
+            "new_acc": 0.4084507042253521
+          },
+          "policy_affected": {
+            "n": 56,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              6.938893903907228e-18,
+              0.06419393671876342
+            ],
+            "fixes": 2,
+            "old_acc": 0.017857142857142856,
+            "new_acc": 0.05357142857142857
+          },
+          "hard": {
+            "n": 317,
+            "flips": 44,
+            "flip_rate": 0.138801261829653,
+            "flip_ci": [
+              0.10504823978719299,
+              0.18120360297113566
+            ],
+            "fixes": 11,
+            "old_acc": 0.4353312302839117,
+            "new_acc": 0.3312302839116719
+          }
+        },
+        "flip_fields": {
+          "purpose_code": 12,
+          "risk_flag": 34,
+          "account_last4": 4,
+          "beneficiary_name": 3
+        },
+        "flip_ids": [
+          3005,
+          3045,
+          3055,
+          3063,
+          3089,
+          3105,
+          3109,
+          3126,
+          3134,
+          3149,
+          3193,
+          3207,
+          3219,
+          3222,
+          3234,
+          3246,
+          3248,
+          3262,
+          3272,
+          3276,
+          3278,
+          3283,
+          3291,
+          3294,
+          3296,
+          3302,
+          3320,
+          3325,
+          3329,
+          3337
+        ],
+        "score": {
+          "n": 600,
+          "all_correct": 0.5983333333333334,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.9866666666666667,
+          "account_last4": 0.9916666666666667,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.8583333333333333,
+          "risk_flag": 0.7133333333333334,
+          "slices": {
+            "new_template=False": {
+              "n": 600,
+              "all_correct": 0.5983333333333334
+            },
+            "heldout_wording=True": {
+              "n": 239,
+              "all_correct": 0.6317991631799164
+            },
+            "heldout_wording=False": {
+              "n": 361,
+              "all_correct": 0.5761772853185596
+            },
+            "ambiguous_purpose=True": {
+              "n": 142,
+              "all_correct": 0.4084507042253521
+            },
+            "ambiguous_purpose=False": {
+              "n": 458,
+              "all_correct": 0.6572052401746725
+            },
+            "policy_affected=True": {
+              "n": 56,
+              "all_correct": 0.05357142857142857
+            },
+            "policy_affected=False": {
+              "n": 544,
+              "all_correct": 0.6544117647058824
+            },
+            "hard=True": {
+              "n": 317,
+              "all_correct": 0.3312302839116719
+            },
+            "hard=False": {
+              "n": 283,
+              "all_correct": 0.8975265017667845
+            }
+          }
+        },
+        "labels": 200,
+        "train_min": 24.41,
+        "offtask": null,
+        "mcnemar_p_holm": 0.179908665889929
+      }
+    },
+    "R0b_300": {
+      "n": 300,
+      "acc": 0.03333333333333333,
+      "A_acc_same_rows": 0.63,
+      "diff_vs_A": {
+        "diff": -0.5966666666666667,
+        "lo": -0.65,
+        "hi": -0.5333333333333333
+      }
+    }
+  },
+  "test_drift": {
+    "A": {
+      "n": 200,
+      "all_correct": 0.335,
+      "valid_json": 1.0,
+      "beneficiary_name": 0.84,
+      "account_last4": 0.985,
+      "amount": 0.955,
+      "currency": 1.0,
+      "value_date": 0.48,
+      "purpose_code": 0.77,
+      "risk_flag": 0.835,
+      "slices": {
+        "new_template=True": {
+          "n": 200,
+          "all_correct": 0.335
+        },
+        "heldout_wording=True": {
+          "n": 23,
+          "all_correct": 0.21739130434782608
+        },
+        "heldout_wording=False": {
+          "n": 177,
+          "all_correct": 0.3502824858757062
+        },
+        "ambiguous_purpose=True": {
+          "n": 41,
+          "all_correct": 0.3170731707317073
+        },
+        "ambiguous_purpose=False": {
+          "n": 159,
+          "all_correct": 0.33962264150943394
+        },
+        "policy_affected=True": {
+          "n": 14,
+          "all_correct": 0.14285714285714285
+        },
+        "policy_affected=False": {
+          "n": 186,
+          "all_correct": 0.34946236559139787
+        },
+        "hard=True": {
+          "n": 108,
+          "all_correct": 0.3148148148148148
+        },
+        "hard=False": {
+          "n": 92,
+          "all_correct": 0.358695652173913
+        }
+      }
+    },
+    "models": {
+      "A_prime": {
+        "n": 200,
+        "counts": {
+          "both_right": 59,
+          "both_wrong_diff": 109,
+          "flip": 8,
+          "fix": 3,
+          "both_wrong_same": 21
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.31,
+        "acc_diff": {
+          "diff": -0.025,
+          "lo": -0.06,
+          "hi": 0.005
+        },
+        "flip_rate": 0.04,
+        "flip_ci": [
+          0.020405632066152306,
+          0.07693206820093293
+        ],
+        "fix_rate": 0.015,
+        "mcnemar_p": 0.2265625,
+        "inherited": 0.15789473684210525,
+        "inherited_ci": [
+          0.10565313754429224,
+          0.2293437209791252
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 8,
+            "flip_rate": 0.04,
+            "flip_ci": [
+              0.020405632066152306,
+              0.07693206820093293
+            ],
+            "fixes": 3,
+            "old_acc": 0.335,
+            "new_acc": 0.31
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 1,
+            "flip_rate": 0.043478260869565216,
+            "flip_ci": [
+              0.007716666143453149,
+              0.20991155070258877
+            ],
+            "fixes": 0,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.17391304347826086
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 2,
+            "flip_rate": 0.04878048780487805,
+            "flip_ci": [
+              0.013480945365169042,
+              0.16138978870370846
+            ],
+            "fixes": 0,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.2682926829268293
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ],
+            "fixes": 2,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.2857142857142857
+          },
+          "hard": {
+            "n": 108,
+            "flips": 4,
+            "flip_rate": 0.037037037037037035,
+            "flip_ci": [
+              0.014495541339902766,
+              0.09138164361061299
+            ],
+            "fixes": 2,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.2962962962962963
+          }
+        },
+        "flip_fields": {
+          "amount": 2,
+          "purpose_code": 3,
+          "risk_flag": 3
+        },
+        "flip_ids": [
+          3603,
+          3621,
+          3632,
+          3692,
+          3737,
+          3746,
+          3773,
+          3781
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.31,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.68,
+          "account_last4": 0.935,
+          "amount": 0.86,
+          "currency": 1.0,
+          "value_date": 0.48,
+          "purpose_code": 0.775,
+          "risk_flag": 0.82,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.31
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.17391304347826086
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.327683615819209
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.2682926829268293
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.32075471698113206
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.2857142857142857
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.3118279569892473
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.2962962962962963
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.32608695652173914
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 22.86,
+        "offtask": null
+      },
+      "R0a": {
+        "n": 200,
+        "counts": {
+          "flip": 67,
+          "both_wrong_diff": 133
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.0,
+        "acc_diff": {
+          "diff": -0.335,
+          "lo": -0.4,
+          "hi": -0.27
+        },
+        "flip_rate": 0.335,
+        "flip_ci": [
+          0.2732408697841632,
+          0.40297808792033485
+        ],
+        "fix_rate": 0.0,
+        "mcnemar_p": 1.3552527156068805e-20,
+        "inherited": 0.0,
+        "inherited_ci": [
+          0.0,
+          0.02807233168807166
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 67,
+            "flip_rate": 0.335,
+            "flip_ci": [
+              0.2732408697841632,
+              0.40297808792033485
+            ],
+            "fixes": 0,
+            "old_acc": 0.335,
+            "new_acc": 0.0
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 5,
+            "flip_rate": 0.21739130434782608,
+            "flip_ci": [
+              0.09663978026586204,
+              0.4190348301626401
+            ],
+            "fixes": 0,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.0
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 13,
+            "flip_rate": 0.3170731707317073,
+            "flip_ci": [
+              0.19564613898988575,
+              0.4698419964434429
+            ],
+            "fixes": 0,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.0
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 2,
+            "flip_rate": 0.14285714285714285,
+            "flip_ci": [
+              0.040093921271464966,
+              0.39941379496970353
+            ],
+            "fixes": 0,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.0
+          },
+          "hard": {
+            "n": 108,
+            "flips": 34,
+            "flip_rate": 0.3148148148148148,
+            "flip_ci": [
+              0.23486550444655252,
+              0.4074853695336538
+            ],
+            "fixes": 0,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.0
+          }
+        },
+        "flip_fields": {
+          "account_last4": 67,
+          "value_date": 12,
+          "beneficiary_name": 32,
+          "purpose_code": 33,
+          "risk_flag": 30,
+          "amount": 16,
+          "currency": 5
+        },
+        "flip_ids": [
+          3600,
+          3603,
+          3607,
+          3616,
+          3620,
+          3621,
+          3622,
+          3623,
+          3624,
+          3627,
+          3630,
+          3632,
+          3633,
+          3639,
+          3640,
+          3641,
+          3645,
+          3650,
+          3651,
+          3652,
+          3658,
+          3662,
+          3666,
+          3667,
+          3668,
+          3670,
+          3674,
+          3676,
+          3680,
+          3681
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.0,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.77,
+          "account_last4": 0.0,
+          "amount": 0.645,
+          "currency": 0.96,
+          "value_date": 0.415,
+          "purpose_code": 0.31,
+          "risk_flag": 0.48,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.0
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.0
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.0
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.0
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.0
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.0
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.0
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.0
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.0
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": null,
+        "offtask": null,
+        "mcnemar_p_holm": 9.486769009248164e-20
+      },
+      "R1-log": {
+        "n": 200,
+        "counts": {
+          "flip": 12,
+          "fix": 83,
+          "both_right": 55,
+          "both_wrong_diff": 42,
+          "both_wrong_same": 8
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.69,
+        "acc_diff": {
+          "diff": 0.355,
+          "lo": 0.28,
+          "hi": 0.435
+        },
+        "flip_rate": 0.06,
+        "flip_ci": [
+          0.03465219425433187,
+          0.1019316929576627
+        ],
+        "fix_rate": 0.415,
+        "mcnemar_p": 3.211393990185144e-14,
+        "inherited": 0.06015037593984962,
+        "inherited_ci": [
+          0.030791181931100718,
+          0.11420477902757886
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 12,
+            "flip_rate": 0.06,
+            "flip_ci": [
+              0.03465219425433187,
+              0.1019316929576627
+            ],
+            "fixes": 83,
+            "old_acc": 0.335,
+            "new_acc": 0.69
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              0.0,
+              0.14311661845042686
+            ],
+            "fixes": 16,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.9130434782608695
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 6,
+            "flip_rate": 0.14634146341463414,
+            "flip_ci": [
+              0.0688424814129593,
+              0.28443458042480957
+            ],
+            "fixes": 9,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.3902439024390244
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ],
+            "fixes": 10,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.8571428571428571
+          },
+          "hard": {
+            "n": 108,
+            "flips": 10,
+            "flip_rate": 0.09259259259259259,
+            "flip_ci": [
+              0.051073330304218255,
+              0.1620985924522356
+            ],
+            "fixes": 45,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.6388888888888888
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 9,
+          "purpose_code": 4
+        },
+        "flip_ids": [
+          3600,
+          3622,
+          3627,
+          3632,
+          3639,
+          3641,
+          3658,
+          3714,
+          3725,
+          3730,
+          3773,
+          3781
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.69,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.94,
+          "account_last4": 0.99,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 1.0,
+          "purpose_code": 0.895,
+          "risk_flag": 0.835,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.69
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.9130434782608695
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.6610169491525424
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.3902439024390244
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.7672955974842768
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.8571428571428571
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.6774193548387096
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.6388888888888888
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.75
+            }
+          }
+        },
+        "labels": 1500,
+        "train_min": 33.48,
+        "offtask": {
+          "acc": 0.602,
+          "vs_untuned_B": {
+            "diff": -0.006,
+            "lo": -0.036,
+            "hi": 0.022
+          }
+        },
+        "mcnemar_p_holm": 1.9268363941110864e-13
+      },
+      "R2": {
+        "n": 200,
+        "counts": {
+          "flip": 13,
+          "both_wrong_diff": 101,
+          "both_right": 54,
+          "both_wrong_same": 26,
+          "fix": 6
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.3,
+        "acc_diff": {
+          "diff": -0.035,
+          "lo": -0.075,
+          "hi": 0.01
+        },
+        "flip_rate": 0.065,
+        "flip_ci": [
+          0.03837635464915299,
+          0.10801907929906895
+        ],
+        "fix_rate": 0.03,
+        "mcnemar_p": 0.1670684814453125,
+        "inherited": 0.19548872180451127,
+        "inherited_ci": [
+          0.13704385003730257,
+          0.27103027678024477
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 13,
+            "flip_rate": 0.065,
+            "flip_ci": [
+              0.03837635464915299,
+              0.10801907929906895
+            ],
+            "fixes": 6,
+            "old_acc": 0.335,
+            "new_acc": 0.3
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 1,
+            "flip_rate": 0.043478260869565216,
+            "flip_ci": [
+              0.007716666143453149,
+              0.20991155070258877
+            ],
+            "fixes": 2,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.2608695652173913
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 4,
+            "flip_rate": 0.0975609756097561,
+            "flip_ci": [
+              0.03859708489808934,
+              0.22547681305523387
+            ],
+            "fixes": 1,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.24390243902439024
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 1,
+            "flip_rate": 0.07142857142857142,
+            "flip_ci": [
+              0.012722215247890939,
+              0.31468704424151117
+            ],
+            "fixes": 0,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.07142857142857142
+          },
+          "hard": {
+            "n": 108,
+            "flips": 12,
+            "flip_rate": 0.1111111111111111,
+            "flip_ci": [
+              0.06471266928983735,
+              0.18422416606859587
+            ],
+            "fixes": 2,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.2222222222222222
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 10,
+          "purpose_code": 2,
+          "account_last4": 1
+        },
+        "flip_ids": [
+          3600,
+          3620,
+          3622,
+          3641,
+          3658,
+          3674,
+          3680,
+          3685,
+          3709,
+          3725,
+          3730,
+          3765,
+          3773
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.3,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.805,
+          "account_last4": 0.98,
+          "amount": 0.975,
+          "currency": 1.0,
+          "value_date": 0.48,
+          "purpose_code": 0.765,
+          "risk_flag": 0.745,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.3
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.2608695652173913
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.3050847457627119
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.24390243902439024
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.31446540880503143
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.07142857142857142
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.3172043010752688
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.2222222222222222
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.391304347826087
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 32.3,
+        "offtask": {
+          "acc": 0.584,
+          "vs_untuned_B": {
+            "diff": -0.024,
+            "lo": -0.052,
+            "hi": 0.002
+          }
+        },
+        "mcnemar_p_holm": 0.334136962890625
+      },
+      "R2-KD": {
+        "n": 200,
+        "counts": {
+          "flip": 13,
+          "both_wrong_diff": 100,
+          "both_right": 54,
+          "both_wrong_same": 27,
+          "fix": 6
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.3,
+        "acc_diff": {
+          "diff": -0.035,
+          "lo": -0.075,
+          "hi": 0.01
+        },
+        "flip_rate": 0.065,
+        "flip_ci": [
+          0.03837635464915299,
+          0.10801907929906895
+        ],
+        "fix_rate": 0.03,
+        "mcnemar_p": 0.1670684814453125,
+        "inherited": 0.20300751879699247,
+        "inherited_ci": [
+          0.14343686665544986,
+          0.2792527138209235
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 13,
+            "flip_rate": 0.065,
+            "flip_ci": [
+              0.03837635464915299,
+              0.10801907929906895
+            ],
+            "fixes": 6,
+            "old_acc": 0.335,
+            "new_acc": 0.3
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 1,
+            "flip_rate": 0.043478260869565216,
+            "flip_ci": [
+              0.007716666143453149,
+              0.20991155070258877
+            ],
+            "fixes": 3,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.30434782608695654
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 5,
+            "flip_rate": 0.12195121951219512,
+            "flip_ci": [
+              0.053233364685777176,
+              0.25544211520976884
+            ],
+            "fixes": 1,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.21951219512195122
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 1,
+            "flip_rate": 0.07142857142857142,
+            "flip_ci": [
+              0.012722215247890939,
+              0.31468704424151117
+            ],
+            "fixes": 1,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.14285714285714285
+          },
+          "hard": {
+            "n": 108,
+            "flips": 12,
+            "flip_rate": 0.1111111111111111,
+            "flip_ci": [
+              0.06471266928983735,
+              0.18422416606859587
+            ],
+            "fixes": 3,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.23148148148148148
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 10,
+          "purpose_code": 3,
+          "account_last4": 1
+        },
+        "flip_ids": [
+          3600,
+          3622,
+          3627,
+          3641,
+          3658,
+          3674,
+          3680,
+          3685,
+          3709,
+          3725,
+          3730,
+          3765,
+          3773
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.3,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.79,
+          "account_last4": 0.985,
+          "amount": 0.975,
+          "currency": 1.0,
+          "value_date": 0.48,
+          "purpose_code": 0.76,
+          "risk_flag": 0.735,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.3
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.30434782608695654
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.2994350282485876
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.21951219512195122
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.32075471698113206
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.14285714285714285
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.3118279569892473
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.23148148148148148
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.3804347826086957
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 29.52,
+        "offtask": {
+          "acc": 0.596,
+          "vs_untuned_B": {
+            "diff": -0.012,
+            "lo": -0.04,
+            "hi": 0.012
+          }
+        },
+        "mcnemar_p_holm": 0.334136962890625
+      },
+      "R3": {
+        "n": 200,
+        "counts": {
+          "flip": 16,
+          "both_wrong_diff": 107,
+          "both_right": 51,
+          "both_wrong_same": 20,
+          "fix": 6
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.285,
+        "acc_diff": {
+          "diff": -0.05,
+          "lo": -0.095,
+          "hi": -0.005
+        },
+        "flip_rate": 0.08,
+        "flip_ci": [
+          0.049840585889759974,
+          0.12598948826714396
+        ],
+        "fix_rate": 0.03,
+        "mcnemar_p": 0.052478790283203125,
+        "inherited": 0.15037593984962405,
+        "inherited_ci": [
+          0.09950350985423632,
+          0.2208778950103551
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 16,
+            "flip_rate": 0.08,
+            "flip_ci": [
+              0.049840585889759974,
+              0.12598948826714396
+            ],
+            "fixes": 6,
+            "old_acc": 0.335,
+            "new_acc": 0.285
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 2,
+            "flip_rate": 0.08695652173913043,
+            "flip_ci": [
+              0.024180004484220363,
+              0.26795981075743663
+            ],
+            "fixes": 3,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.2608695652173913
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 6,
+            "flip_rate": 0.14634146341463414,
+            "flip_ci": [
+              0.0688424814129593,
+              0.28443458042480957
+            ],
+            "fixes": 1,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.1951219512195122
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ],
+            "fixes": 2,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.2857142857142857
+          },
+          "hard": {
+            "n": 108,
+            "flips": 11,
+            "flip_rate": 0.10185185185185185,
+            "flip_ci": [
+              0.057829317593360796,
+              0.17322506146408273
+            ],
+            "fixes": 4,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.25
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 9,
+          "purpose_code": 3,
+          "account_last4": 4
+        },
+        "flip_ids": [
+          3600,
+          3622,
+          3627,
+          3632,
+          3639,
+          3641,
+          3658,
+          3680,
+          3698,
+          3709,
+          3725,
+          3728,
+          3730,
+          3746,
+          3773,
+          3781
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.285,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.81,
+          "account_last4": 0.9,
+          "amount": 0.815,
+          "currency": 0.99,
+          "value_date": 0.48,
+          "purpose_code": 0.755,
+          "risk_flag": 0.785,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.285
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.2608695652173913
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.288135593220339
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.1951219512195122
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.3081761006289308
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.2857142857142857
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.2849462365591398
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.25
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.32608695652173914
+            }
+          }
+        },
+        "labels": 0,
+        "train_min": 23.61,
+        "offtask": {
+          "acc": 0.602,
+          "vs_untuned_B": {
+            "diff": -0.006,
+            "lo": -0.03,
+            "hi": 0.018
+          }
+        },
+        "mcnemar_p_holm": 0.15743637084960938
+      },
+      "R4": {
+        "n": 200,
+        "counts": {
+          "flip": 12,
+          "fix": 64,
+          "both_right": 55,
+          "both_wrong_diff": 53,
+          "both_wrong_same": 16
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.595,
+        "acc_diff": {
+          "diff": 0.26,
+          "lo": 0.185,
+          "hi": 0.34
+        },
+        "flip_rate": 0.06,
+        "flip_ci": [
+          0.03465219425433187,
+          0.1019316929576627
+        ],
+        "fix_rate": 0.32,
+        "mcnemar_p": 1.0023457813247953e-09,
+        "inherited": 0.12030075187969924,
+        "inherited_ci": [
+          0.07542181331198794,
+          0.18649777691729952
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 12,
+            "flip_rate": 0.06,
+            "flip_ci": [
+              0.03465219425433187,
+              0.1019316929576627
+            ],
+            "fixes": 64,
+            "old_acc": 0.335,
+            "new_acc": 0.595
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              0.0,
+              0.14311661845042686
+            ],
+            "fixes": 13,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.782608695652174
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 4,
+            "flip_rate": 0.0975609756097561,
+            "flip_ci": [
+              0.03859708489808934,
+              0.22547681305523387
+            ],
+            "fixes": 8,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.4146341463414634
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ],
+            "fixes": 9,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.7857142857142857
+          },
+          "hard": {
+            "n": 108,
+            "flips": 9,
+            "flip_rate": 0.08333333333333333,
+            "flip_ci": [
+              0.04446040457498103,
+              0.15082906188048312
+            ],
+            "fixes": 32,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.5277777777777778
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 9,
+          "account_last4": 3,
+          "purpose_code": 3
+        },
+        "flip_ids": [
+          3600,
+          3622,
+          3627,
+          3632,
+          3641,
+          3650,
+          3658,
+          3725,
+          3728,
+          3730,
+          3773,
+          3781
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.595,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.93,
+          "account_last4": 0.945,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 0.995,
+          "purpose_code": 0.83,
+          "risk_flag": 0.81,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.595
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.782608695652174
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.5706214689265536
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.4146341463414634
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.6415094339622641
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.7857142857142857
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.5806451612903226
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.5277777777777778
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.6739130434782609
+            }
+          }
+        },
+        "labels": 200,
+        "train_min": 25.32,
+        "offtask": {
+          "acc": 0.606,
+          "vs_untuned_B": {
+            "diff": -0.002,
+            "lo": -0.026,
+            "hi": 0.022
+          }
+        },
+        "mcnemar_p_holm": 5.011728906623976e-09
+      },
+      "R4-rand": {
+        "n": 200,
+        "counts": {
+          "flip": 10,
+          "fix": 56,
+          "both_wrong_diff": 58,
+          "both_right": 57,
+          "both_wrong_same": 19
+        },
+        "old_acc": 0.335,
+        "new_acc": 0.565,
+        "acc_diff": {
+          "diff": 0.23,
+          "lo": 0.16,
+          "hi": 0.305
+        },
+        "flip_rate": 0.05,
+        "flip_ci": [
+          0.02738264560076393,
+          0.08957814813877599
+        ],
+        "fix_rate": 0.28,
+        "mcnemar_p": 6.901424055611068e-09,
+        "inherited": 0.14285714285714285,
+        "inherited_ci": [
+          0.0934023426858272,
+          0.21236360851993824
+        ],
+        "slices": {
+          "new_template": {
+            "n": 200,
+            "flips": 10,
+            "flip_rate": 0.05,
+            "flip_ci": [
+              0.02738264560076393,
+              0.08957814813877599
+            ],
+            "fixes": 56,
+            "old_acc": 0.335,
+            "new_acc": 0.565
+          },
+          "heldout_wording": {
+            "n": 23,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              0.0,
+              0.14311661845042686
+            ],
+            "fixes": 13,
+            "old_acc": 0.21739130434782608,
+            "new_acc": 0.782608695652174
+          },
+          "ambiguous_purpose": {
+            "n": 41,
+            "flips": 5,
+            "flip_rate": 0.12195121951219512,
+            "flip_ci": [
+              0.053233364685777176,
+              0.25544211520976884
+            ],
+            "fixes": 16,
+            "old_acc": 0.3170731707317073,
+            "new_acc": 0.5853658536585366
+          },
+          "policy_affected": {
+            "n": 14,
+            "flips": 0,
+            "flip_rate": 0.0,
+            "flip_ci": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ],
+            "fixes": 5,
+            "old_acc": 0.14285714285714285,
+            "new_acc": 0.5
+          },
+          "hard": {
+            "n": 108,
+            "flips": 9,
+            "flip_rate": 0.08333333333333333,
+            "flip_ci": [
+              0.04446040457498103,
+              0.15082906188048312
+            ],
+            "fixes": 27,
+            "old_acc": 0.3148148148148148,
+            "new_acc": 0.48148148148148145
+          }
+        },
+        "flip_fields": {
+          "risk_flag": 8,
+          "purpose_code": 3
+        },
+        "flip_ids": [
+          3600,
+          3622,
+          3627,
+          3632,
+          3641,
+          3658,
+          3680,
+          3725,
+          3730,
+          3773
+        ],
+        "score": {
+          "n": 200,
+          "all_correct": 0.565,
+          "valid_json": 1.0,
+          "beneficiary_name": 0.905,
+          "account_last4": 0.965,
+          "amount": 1.0,
+          "currency": 1.0,
+          "value_date": 0.975,
+          "purpose_code": 0.795,
+          "risk_flag": 0.805,
+          "slices": {
+            "new_template=True": {
+              "n": 200,
+              "all_correct": 0.565
+            },
+            "heldout_wording=True": {
+              "n": 23,
+              "all_correct": 0.782608695652174
+            },
+            "heldout_wording=False": {
+              "n": 177,
+              "all_correct": 0.536723163841808
+            },
+            "ambiguous_purpose=True": {
+              "n": 41,
+              "all_correct": 0.5853658536585366
+            },
+            "ambiguous_purpose=False": {
+              "n": 159,
+              "all_correct": 0.559748427672956
+            },
+            "policy_affected=True": {
+              "n": 14,
+              "all_correct": 0.5
+            },
+            "policy_affected=False": {
+              "n": 186,
+              "all_correct": 0.5698924731182796
+            },
+            "hard=True": {
+              "n": 108,
+              "all_correct": 0.48148148148148145
+            },
+            "hard=False": {
+              "n": 92,
+              "all_correct": 0.6630434782608695
+            }
+          }
+        },
+        "labels": 200,
+        "train_min": 24.41,
+        "offtask": null,
+        "mcnemar_p_holm": 2.760569622244427e-08
+      }
+    }
+  }
+}
