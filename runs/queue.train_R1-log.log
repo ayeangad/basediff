@@ -1,38 +1,0 @@
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:36,  8.51it/s]Loading weights:  40%|████      | 125/311 [00:00<00:00, 666.62it/s]Loading weights:  63%|██████▎   | 195/311 [00:00<00:00, 447.71it/s]Loading weights:  80%|███████▉  | 248/311 [00:00<00:00, 437.09it/s]Loading weights:  95%|█████████▌| 297/311 [00:00<00:00, 377.34it/s]Loading weights: 100%|██████████| 311/311 [00:01<00:00, 308.27it/s]
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/angad/Downloads/projects/portcheck/portcheck/train.py", line 205, in <module>
-    main(cfg)
-  File "/home/angad/Downloads/projects/portcheck/portcheck/train.py", line 162, in main
-    scaler.scale(loss).backward()
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/_tensor.py", line 647, in backward
-    torch.autograd.backward(
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/autograd/__init__.py", line 354, in backward
-    _engine_run_backward(
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/autograd/graph.py", line 829, in _engine_run_backward
-    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 220.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 215.56 MiB is free. Including non-PyTorch memory, this process has 3.26 GiB memory in use. Of the allocated memory 2.96 GiB is allocated by PyTorch, and 220.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  26%|██▋       | 82/311 [00:00<00:00, 765.21it/s]Loading weights:  51%|█████     | 159/311 [00:00<00:00, 762.14it/s]Loading weights:  76%|███████▌  | 236/311 [00:00<00:00, 279.13it/s]Loading weights:  92%|█████████▏| 285/311 [00:01<00:00, 180.49it/s]Loading weights: 100%|██████████| 311/311 [00:01<00:00, 235.49it/s]
-{"step": 10, "epoch": 0, "loss": 0.1591, "lr": 0.00019963183634476756, "tok_s": 374.9, "elapsed_min": 1.8, "peak_gb": 2.99}
-{"step": 20, "epoch": 0, "loss": 0.0671, "lr": 0.00019670277247913205, "tok_s": 379.5, "elapsed_min": 3.59, "peak_gb": 2.99}
-{"step": 30, "epoch": 0, "loss": 0.0269, "lr": 0.00019093075592922358, "tok_s": 379.7, "elapsed_min": 5.35, "peak_gb": 2.99}
-{"step": 40, "epoch": 0, "loss": 0.0181, "lr": 0.00018248547748594244, "tok_s": 379.7, "elapsed_min": 7.13, "peak_gb": 2.99}
-{"step": 50, "epoch": 0, "loss": 0.0253, "lr": 0.00017161521883143934, "tok_s": 379.6, "elapsed_min": 8.9, "peak_gb": 2.99}
-{"step": 60, "epoch": 0, "loss": 0.0396, "lr": 0.00015863955333706957, "tok_s": 379.3, "elapsed_min": 10.67, "peak_gb": 2.99}
-{"step": 70, "epoch": 0, "loss": 0.0155, "lr": 0.00014393995096591416, "tok_s": 379.6, "elapsed_min": 12.46, "peak_gb": 2.99}
-{"step": 80, "epoch": 0, "loss": 0.0199, "lr": 0.00012794856348516095, "tok_s": 379.5, "elapsed_min": 14.25, "peak_gb": 2.99}
-{"step": 90, "epoch": 0, "loss": 0.0135, "lr": 0.00011113551969048089, "tok_s": 379.1, "elapsed_min": 16.02, "peak_gb": 2.99}
-{"step": 100, "epoch": 1, "loss": 0.0176, "lr": 9.399510414850518e-05, "tok_s": 379.1, "elapsed_min": 17.79, "peak_gb": 2.99}
-{"step": 110, "epoch": 1, "loss": 0.0122, "lr": 7.703122578682043e-05, "tok_s": 378.8, "elapsed_min": 19.56, "peak_gb": 2.99}
-{"step": 120, "epoch": 1, "loss": 0.01, "lr": 6.0742603538582835e-05, "tok_s": 378.8, "elapsed_min": 21.38, "peak_gb": 2.99}
-{"step": 130, "epoch": 1, "loss": 0.0083, "lr": 4.560810456712754e-05, "tok_s": 378.5, "elapsed_min": 23.15, "peak_gb": 2.99}
-{"step": 140, "epoch": 1, "loss": 0.0104, "lr": 3.207266611027069e-05, "tok_s": 378.4, "elapsed_min": 24.93, "peak_gb": 2.99}
-{"step": 150, "epoch": 1, "loss": 0.0172, "lr": 2.0534214826237508e-05, "tok_s": 378.3, "elapsed_min": 26.73, "peak_gb": 2.99}
-{"step": 160, "epoch": 1, "loss": 0.0091, "lr": 1.1331968197726006e-05, "tok_s": 378.3, "elapsed_min": 28.51, "peak_gb": 2.99}
-{"step": 170, "epoch": 1, "loss": 0.0065, "lr": 4.736461919661761e-06, "tok_s": 378.4, "elapsed_min": 30.28, "peak_gb": 2.99}
-{"step": 180, "epoch": 1, "loss": 0.006, "lr": 9.415964542203059e-07, "tok_s": 378.3, "elapsed_min": 32.06, "peak_gb": 2.99}
-{"step": 188, "epoch": 1, "loss": 0.0079, "lr": 0.0, "tok_s": 378.3, "elapsed_min": 33.46, "peak_gb": 2.99}
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-{"config": {"base": "Qwen/Qwen3-0.6B", "train_file": "data/recipes/R1-log.jsonl", "out": "runs/R1-log", "logs_file": "runs/A/logs.preds.topk.pt", "r": 16, "alpha": 32, "dropout": 0.05, "lr": 0.0002, "epochs": 2, "max_len": 384, "micro_batch": 2, "effective_batch": 16, "precision": "fp32", "seed": 0}, "steps": 188, "train_rows": 1500, "train_tokens_seen": 759410, "minutes": 33.48, "tok_s": 378.1, "peak_gb": 2.99, "git": "a2ab8c7"}

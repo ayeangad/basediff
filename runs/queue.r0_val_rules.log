@@ -1,162 +1,0 @@
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:52,  5.90it/s]Loading weights:  51%|█████▏    | 160/311 [00:00<00:00, 713.99it/s]Loading weights:  80%|████████  | 250/311 [00:00<00:00, 605.80it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 544.69it/s]
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 105, in <module>
-    main()
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 88, in main
-    outs = run(a.base, a.adapter, rows, a.batch_size, system=a.system, shots=shots, topk=a.save_topk)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 42, in run
-    res = model.generate(**enc, max_new_tokens=max_new, do_sample=False, temperature=None,
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2989, in generate
-    result = decoding_method(
-             ^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 3189, in _sample
-    outputs = self._prefill(
-              ^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 4300, in _prefill
-    return self(**model_inputs, return_dict=True)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 943, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 469, in forward
-    outputs: BaseModelOutputWithPast = self.model(
-                                       ^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1081, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
-    outputs = func(self, *args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 405, in forward
-    hidden_states = decoder_layer(
-                    ^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 111, in __call__
-    return super().__call__(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 299, in forward
-    hidden_states, _ = self.self_attn(
-                       ^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 249, in forward
-    query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin)
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 160, in apply_rotary_pos_emb
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-                           ~~~~~~~~~~~~~~~^~~~~
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 36.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 35.56 MiB is free. Including non-PyTorch memory, this process has 3.43 GiB memory in use. Of the allocated memory 3.30 GiB is allocated by PyTorch, and 62.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<01:27,  3.56it/s]Loading weights:  60%|██████    | 188/311 [00:00<00:00, 623.52it/s]Loading weights:  95%|█████████▍| 294/311 [00:00<00:00, 746.31it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 612.93it/s]
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 105, in <module>
-    main()
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 88, in main
-    outs = run(a.base, a.adapter, rows, a.batch_size, system=a.system, shots=shots, topk=a.save_topk)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/portcheck/generate.py", line 42, in run
-    res = model.generate(**enc, max_new_tokens=max_new, do_sample=False, temperature=None,
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2989, in generate
-    result = decoding_method(
-             ^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 3217, in _sample
-    outputs = model_forward(**model_inputs, return_dict=True)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 943, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 469, in forward
-    outputs: BaseModelOutputWithPast = self.model(
-                                       ^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1081, in wrapper
-    output = func(self, *args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
-    outputs = func(self, *args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 405, in forward
-    hidden_states = decoder_layer(
-                    ^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 111, in __call__
-    return super().__call__(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 299, in forward
-    hidden_states, _ = self.self_attn(
-                       ^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 258, in forward
-    attn_output, attn_weights = attention_interface(
-                                ^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/integrations/sdpa_attention.py", line 112, in sdpa_attention_forward
-    value = repeat_kv(value, module.num_key_value_groups)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/angad/Downloads/projects/portcheck/.venv/lib/python3.12/site-packages/transformers/integrations/sdpa_attention.py", line 27, in repeat_kv
-    return hidden_states.reshape(batch, num_key_value_heads * n_rep, slen, head_dim)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 18.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 15.56 MiB is free. Including non-PyTorch memory, this process has 3.45 GiB memory in use. Of the allocated memory 3.16 GiB is allocated by PyTorch, and 228.24 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  25%|██▌       | 78/311 [00:00<00:00, 776.33it/s]Loading weights:  55%|█████▍    | 170/311 [00:00<00:00, 859.10it/s]Loading weights:  82%|████████▏ | 256/311 [00:00<00:00, 739.55it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 733.84it/s]
-{"base": "Qwen/Qwen3-0.6B", "adapter": null, "data": "data/val.jsonl", "n": 200, "minutes": 7.62, "k_shots": 0, "system_override": true, "r0": "rules"}
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 119/311 [00:00<00:00, 1174.71it/s]Loading weights:  76%|███████▌  | 237/311 [00:00<00:00, 857.87it/s] Loading weights: 100%|██████████| 311/311 [00:00<00:00, 882.23it/s]
-{"base": "Qwen/Qwen3-0.6B", "adapter": null, "data": "data/val.jsonl", "n": 200, "minutes": 9.6, "k_shots": 0, "system_override": true, "r0": "rules", "max_new": 256}

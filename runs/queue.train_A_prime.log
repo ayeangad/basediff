@@ -1,22 +1,0 @@
-Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  35%|███▍      | 101/290 [00:00<00:00, 968.37it/s]Loading weights:  84%|████████▍ | 245/290 [00:00<00:00, 1207.51it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 1259.22it/s]
-{"step": 10, "epoch": 0, "loss": 0.0775, "lr": 0.00019963183634476756, "tok_s": 547.9, "elapsed_min": 1.16, "peak_gb": 2.84}
-{"step": 20, "epoch": 0, "loss": 0.0525, "lr": 0.00019670277247913205, "tok_s": 535.3, "elapsed_min": 2.38, "peak_gb": 2.84}
-{"step": 30, "epoch": 0, "loss": 0.0498, "lr": 0.00019093075592922358, "tok_s": 533.0, "elapsed_min": 3.61, "peak_gb": 2.84}
-{"step": 40, "epoch": 0, "loss": 0.0259, "lr": 0.00018248547748594244, "tok_s": 531.4, "elapsed_min": 4.83, "peak_gb": 2.85}
-{"step": 50, "epoch": 0, "loss": 0.0354, "lr": 0.00017161521883143934, "tok_s": 531.8, "elapsed_min": 6.07, "peak_gb": 2.85}
-{"step": 60, "epoch": 0, "loss": 0.0451, "lr": 0.00015863955333706957, "tok_s": 530.6, "elapsed_min": 7.3, "peak_gb": 2.87}
-{"step": 70, "epoch": 0, "loss": 0.0275, "lr": 0.00014393995096591416, "tok_s": 529.7, "elapsed_min": 8.52, "peak_gb": 2.87}
-{"step": 80, "epoch": 0, "loss": 0.0203, "lr": 0.00012794856348516095, "tok_s": 528.9, "elapsed_min": 9.77, "peak_gb": 2.87}
-{"step": 90, "epoch": 0, "loss": 0.0165, "lr": 0.00011113551969048089, "tok_s": 529.3, "elapsed_min": 10.97, "peak_gb": 2.87}
-{"step": 100, "epoch": 1, "loss": 0.0059, "lr": 9.399510414850518e-05, "tok_s": 529.5, "elapsed_min": 12.13, "peak_gb": 2.87}
-{"step": 110, "epoch": 1, "loss": 0.0173, "lr": 7.703122578682043e-05, "tok_s": 529.6, "elapsed_min": 13.37, "peak_gb": 2.9}
-{"step": 120, "epoch": 1, "loss": 0.0048, "lr": 6.0742603538582835e-05, "tok_s": 528.7, "elapsed_min": 14.6, "peak_gb": 2.9}
-{"step": 130, "epoch": 1, "loss": 0.0076, "lr": 4.560810456712754e-05, "tok_s": 528.3, "elapsed_min": 15.82, "peak_gb": 2.9}
-{"step": 140, "epoch": 1, "loss": 0.0122, "lr": 3.207266611027069e-05, "tok_s": 528.5, "elapsed_min": 17.03, "peak_gb": 2.9}
-{"step": 150, "epoch": 1, "loss": 0.0096, "lr": 2.0534214826237508e-05, "tok_s": 528.4, "elapsed_min": 18.27, "peak_gb": 2.9}
-{"step": 160, "epoch": 1, "loss": 0.012, "lr": 1.1331968197726006e-05, "tok_s": 528.0, "elapsed_min": 19.5, "peak_gb": 2.9}
-{"step": 170, "epoch": 1, "loss": 0.0069, "lr": 4.736461919661761e-06, "tok_s": 528.8, "elapsed_min": 20.7, "peak_gb": 2.9}
-{"step": 180, "epoch": 1, "loss": 0.01, "lr": 9.415964542203059e-07, "tok_s": 528.7, "elapsed_min": 21.91, "peak_gb": 2.9}
-{"step": 188, "epoch": 1, "loss": 0.0093, "lr": 0.0, "tok_s": 528.7, "elapsed_min": 22.85, "peak_gb": 2.9}
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-{"config": {"base": "Qwen/Qwen2.5-0.5B-Instruct", "train_file": "data/gold_train.jsonl", "out": "runs/A_prime", "seed": 1, "r": 16, "alpha": 32, "dropout": 0.05, "lr": 0.0002, "epochs": 2, "max_len": 384, "micro_batch": 4, "effective_batch": 16, "precision": "fp32"}, "steps": 188, "train_rows": 1500, "train_tokens_seen": 724866, "minutes": 22.86, "tok_s": 528.4, "peak_gb": 2.9, "git": "7b0aeb5"}
