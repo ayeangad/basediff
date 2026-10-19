@@ -1,0 +1,25 @@
+[project]
+name = "basediff"
+version = "0.1.0"
+description = "What breaks when a fine-tuned specialist moves to a new base model, and how to catch it before you ship"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "transformers>=5",
+    "peft",
+    "faker",
+    "scipy",
+    "pyyaml",
+    "lm-eval",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["basediff*"]
