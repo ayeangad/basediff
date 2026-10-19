@@ -10,7 +10,7 @@ Date: 2026-10-19. Everything below comes from files in this repo (`results/summa
 | A's production logs on 1,500 inputs, with top-20 log-probs | done |
 | 6 rebuilds on Qwen3-0.6B: R1-log, R2, R2-KD, R3, R4, R4-rand | done (25–35 min each) |
 | R0a (zero-shot prompt with the written rules) | done |
-| R0b (3-shot, 300-row subset) | PENDING_R0B |
+| R0b (3-shot, 300-row subset) | done (23 min at batch 1) |
 | Scoring on test_id (600) and test_drift (200) | done |
 | Off-task ARC-Easy (500 items, paired) | PENDING_OFFTASK |
 
@@ -68,7 +68,7 @@ PENDING_EXTRA
 
 ## 4. What it means (plain words)
 
-1. **Fine-tuning still matters at this size.** The new base with written rules scores 0%: it cannot even pull the last 4 account digits.
+1. **Fine-tuning still matters at this size.** The new base with written rules scores 0%; with 3 worked examples it scores 3.3% against A's 63.0% on the same 300 rows. Examples help with formats (last-4 digits 1% → 25%, dates 97%), but not with the rules (risk_flag 45%, purpose_code 50%).
 2. **Accuracy hides regressions.** The best rebuild (R1-log, +10.8 points) still breaks 79 tickets the old model got right (13.2%), about 6× the seed-noise floor (2.0%). Most of these (57/79) are `risk_flag`. Under the pre-registered gate, **no rebuild would SHIP.** Every one has a flip rate far above the floor, which is exactly what the diff report is for.
 3. **Rebuilding from the old model's logs does not work here.**
    - R2, R2-KD and R3 all score *below* the model they replace.
@@ -82,7 +82,7 @@ PENDING_EXTRA
 
 | | Hypothesis | Result |
 |---|---|---|
-| H1 | best R0 ≥ 5 pts below A | **Supported** (R0a 0% vs 62.3%; R0b: PENDING_R0B_SHORT) |
+| H1 | best R0 ≥ 5 pts below A | **Supported** (R0a 0% vs 62.3%; R0b 3-shot 3.3% vs A 63.0% on the same 300 rows) |
 | H2 | R3 ≥ 95% of R1-log accuracy | **Not supported** (75%: 55.2 vs 73.2) |
 | H3 | R2 inherits more of A's errors than R1-log; R3/R4 reduce it | **Supported** (80% vs 22%; R3 66%, R4 61%) |
 | H4 | R4 beats R4-rand (overall and policy slice) | **Not supported** (59.2 vs 59.8; policy 0% vs 5%) |
@@ -101,7 +101,7 @@ PENDING_EXTRA
 >
 > Every specialist built on an open base has to be rebuilt when a better base ships. I measured what happens when you do that, rebuilding a payments-ops specialist from Qwen2.5-0.5B onto Qwen3-0.6B, on a laptop GPU for $0, with a per-example audit of every rebuild:
 >
-> - Prompting the new base alone scored 0% (it couldn't extract the account's last 4 digits), so fine-tuning still mattered.
+> - Prompting the new base scored 0%, and 3% even with worked examples, against 63% for the old specialist, so fine-tuning still mattered.
 > - Rebuilding from the old model's logs scored *below* the old model: it copied ~80% of its mistakes and its outdated risk rule. Soft labels and rule filters didn't fix that.
 > - The best rebuild (full relabel) gained 11 points but broke 13% of the tickets the old model got right, 6× the noise from simply retraining with a new seed. Net accuracy hid it; the per-example diff didn't.
 > - On ticket formats the old model never saw, 200 labels recovered 73% of the full relabel's gain.
