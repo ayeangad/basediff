@@ -85,10 +85,6 @@ python -m basediff.report                   # tables -> results/
 
 Or with make: `make data`, `make test`, `make queue`, `make report`.
 
-```bash
-# (same steps as above)
-```
-
 Compare any two models on any labelled test set:
 
 ```bash
